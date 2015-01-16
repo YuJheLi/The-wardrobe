@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -28,13 +29,20 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 
 public class AddclothActivity extends ActionBarActivity {
 
     private static final String TAG = "AddclothActivity";
     private ImageView myImage = null;
+
+    private Uri imageUri; //图片路径
+    private String filename; //图片名称
 
     private static final int PHOTO_PICKED_WITH_DATA = 3021;
     private static final int CAMERA_WITH_DATA = 3023;
@@ -87,8 +95,10 @@ public class AddclothActivity extends ActionBarActivity {
                 switch (item) {
                     case 0:
                         intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                        //File f = new File(android.os.Environment.getExternalStorageDirectory(), "temp.jpg");
-                       // intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
+
+                        File f = new File(android.os.Environment.getExternalStorageDirectory(), "temp.jpg");
+                        imageUri = Uri.fromFile(f);
+                        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
 
                         startActivityForResult(intent, CAMERA_WITH_DATA);
                         break;
@@ -114,11 +124,9 @@ public class AddclothActivity extends ActionBarActivity {
         startActivityForResult(intent, PHOTO_PICKED_WITH_DATA);
 
     }
-    protected void doCropPhoto2(Bitmap data){
-        Intent intent = getCropImageIntentFor(data);
-        File f = new File(android.os.Environment
-                .getExternalStorageDirectory(), "temp.jpg");
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
+    protected void doCropPhoto2(){
+        Intent intent = getCropImageIntentFor();
+
         startActivityForResult(intent, PHOTO_PICKED_WITH_DATA);
 
     }
@@ -132,21 +140,27 @@ public class AddclothActivity extends ActionBarActivity {
         intent.putExtra("crop", "true");
         intent.putExtra("aspectX", 1);
         intent.putExtra("aspectY", 1);
-        intent.putExtra("outputX", 128);
-        intent.putExtra("outputY", 128);
+        intent.putExtra("outputX", 300);
+        intent.putExtra("outputY", 300);
         intent.putExtra("return-data", true);
+
+
         return intent;
     }
-    public static Intent getCropImageIntentFor(Bitmap data) {
+    public  Intent getCropImageIntentFor() {
         Intent intent = new Intent("com.android.camera.action.CROP");
 
-       // intent.setDataAndType(Uri.fromFile(tempFile), "image/*");
-        intent.putExtra("crop", "true");
+       intent.setDataAndType(imageUri, "image/*");
+        intent.putExtra("scale", "true");
         intent.putExtra("aspectX", 1);
         intent.putExtra("aspectY", 1);
-        intent.putExtra("outputX", 128);
-        intent.putExtra("outputY", 128);
+        intent.putExtra("outputX", 340);
+        intent.putExtra("outputY",340);
         intent.putExtra("return-data", true);
+        File f = new File(android.os.Environment
+                .getExternalStorageDirectory(), "temp2.jpg");
+        imageUri=Uri.fromFile(f);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
         return intent;
     }
 
@@ -157,8 +171,9 @@ public class AddclothActivity extends ActionBarActivity {
 
             if (requestCode == PHOTO_PICKED_WITH_DATA) {
 
-               // String path = getPathFromCamera(data);
+               //String path = getPathFromCamera(data);
                 //Log.d(TAG, path);
+
 
 
 
@@ -166,9 +181,8 @@ public class AddclothActivity extends ActionBarActivity {
                // Intent intent = new Intent(this, CreateActivity.class);
                 //intent.putExtra("imagePath", path);
                 //startActivityForResult(intent, CREATE_NEW_QUESTION);
-                Bitmap photo1 = data.getParcelableExtra("data");
-                if(photo1!=null){
-                    myImage.setImageBitmap(photo1);}
+
+
 
             } else if (requestCode == IMAGE_FROM_GALLERY) {
 
@@ -176,19 +190,20 @@ public class AddclothActivity extends ActionBarActivity {
                 //Log.d(TAG, path);
                 final Bitmap photo = data.getParcelableExtra("data");
 
-                if(photo!=null){
-                    doCropPhoto2(photo);
-                }
+
+                    doCropPhoto2();
+
 
                 //Intent intent = new Intent(this, CreateActivity.class);
                 //intent.putExtra("imagePath", path);
                 //startActivityForResult(intent, CREATE_NEW_QUESTION);
 
             }else if (requestCode == CAMERA_WITH_DATA) {
-                final Bitmap photo = data.getParcelableExtra("data");
-                if(photo!=null){
-                    doCropPhoto(photo);
-                }
+               String path = getPathFromCamera(data);
+
+
+                    doCropPhoto2();
+
                 // TODO insert new Question to myQuestion
 
             }
