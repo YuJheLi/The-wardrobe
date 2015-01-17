@@ -3,13 +3,48 @@
 
     <string name="app_name">MyWardrobe</string>
     <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Add photo</string>
+    <string name="action_settings">加衣服歐</string>
     <string name="title_activity_addclothes">addclothes</string>
-    <string name="option_photo_title">Pick a source</string>
-    <string name="option_take_photo">Take photo</string>
-    <string name="option_choose_photo">Choose photo</string>
+    <string name="option_photo_title">我有照片ㄖ</string>
+    <string name="option_take_photo">照相</string>
+    <string name="option_choose_photo">從手機選照片</string>
     <string name="title_activity_addcloth">AddclothActivity</string>
     <string name="title_activity_browse">BrowseActivity</string>
     <string name="title_activity_test">test</string>
+
+
+    <string-array name="colors">
+        <item>白</item>
+        <item>黃</item>
+        <item>深綠</item>
+        <item>淺綠</item>
+        <item>紅</item>
+        <item>粉紅</item>
+        <item>紫</item>
+        <item>黑</item>
+        <item>深藍</item>
+        <item>水藍</item>
+        <item>橘</item>
+        <item>其他</item>
+
+    </string-array>
+    <string-array name="texture">
+        <item>排汗</item>
+        <item>牛仔</item>
+        <item></item>
+        <item>淺綠</item>
+        <item>紅</item>
+        <item>粉紅</item>
+        <item>紫</item>
+        <item>黑</item>
+        <item>深藍</item>
+        <item>水藍</item>
+        <item>橘</item>
+        <item>其他</item>
+
+    </string-array>
+
+
+
 
 </resources>

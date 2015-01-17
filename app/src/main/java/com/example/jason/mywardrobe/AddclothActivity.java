@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import android.app.AlertDialog;
@@ -29,6 +31,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.io.BufferedInputStream;
@@ -52,12 +55,22 @@ public class AddclothActivity extends ActionBarActivity {
     private static final int PHOTO_PICKED_WITH_DATA = 3021;
     private static final int CAMERA_WITH_DATA = 3023;
     private static final int IMAGE_FROM_GALLERY = 3024;
+    private Spinner color;
+    private Spinner fab;
+    private Spinner use;
+    private EditText name;
+    private Button  send;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addcloth);
 
         myImage = (ImageView)findViewById(R.id.myimage);
+        color=(Spinner)findViewById(R.id.spcolor);
+        fab=(Spinner)findViewById(R.id.sptype);
+        use=(Spinner)findViewById(R.id.spuse);
+        send=(Button)findViewById(R.id.button);
+
 
 
     }
@@ -216,7 +229,6 @@ public class AddclothActivity extends ActionBarActivity {
                 Bitmap scaledBmp = Bitmap.createScaledBitmap(bmp, screenWidth,
                         (int) (scaleFactor * bmp.getHeight()), false);
                 myImage.setImageBitmap(scaledBmp);
-
                //String path = getPathFromCamera(data);
                 //Log.d(TAG, path);
 
