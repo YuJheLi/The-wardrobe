@@ -9,5 +9,7 @@
     <string name="option_take_photo">Take photo</string>
     <string name="option_choose_photo">Choose photo</string>
     <string name="title_activity_addcloth">AddclothActivity</string>
+    <string name="title_activity_browse">BrowseActivity</string>
+    <string name="title_activity_test">test</string>
 
 </resources>
