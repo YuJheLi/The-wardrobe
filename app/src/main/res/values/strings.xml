@@ -11,6 +11,7 @@
     <string name="title_activity_addcloth">AddclothActivity</string>
     <string name="title_activity_browse">BrowseActivity</string>
     <string name="title_activity_test">test</string>
+    <string name="title_activity_match">MatchActivity</string>
 
 
     <string-array name="colors">

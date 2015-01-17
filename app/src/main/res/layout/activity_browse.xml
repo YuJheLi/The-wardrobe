@@ -18,65 +18,63 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="470dp"
-        android:orientation="vertical"
-        android:id="@+id/itemarea"
-        android:weightSum="1">
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView" >
 
-        <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/swipe_container"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="401dp"
-            android:layout_weight="0.51">
+            android:layout_height="470dp"
+            android:orientation="vertical"
+            android:id="@+id/itemarea"
+            android:weightSum="1">
 
             <GridView
                 android:id="@+id/list_question"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="406dp"
                 android:clipToPadding="false"
                 android:divider="@android:color/transparent"
                 android:listSelector="@android:color/transparent"
                 android:numColumns="2"
                 android:scrollbarStyle="outsideOverlay" />
 
-        </android.support.v4.widget.SwipeRefreshLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="1"
-            android:id="@+id/buttonarea"
-            android:layout_below="@+id/itemarea"
-            android:layout_alignParentBottom="false"
-            android:layout_alignParentTop="false"
-            android:layout_alignParentLeft="false"
-            android:layout_alignParentRight="false"
-            android:layout_weight="0.51">
-
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:text="New Button"
-                android:visibility="visible" />
-
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:layout_weight="0.12"
-                android:text="New Button" />
-
-            <Button
-                android:id="@+id/button4"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:text="New Button" />
         </LinearLayout>
+    </ScrollView>
 
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="horizontal"
+        android:weightSum="1"
+        android:id="@+id/buttonarea"
+        android:layout_alignParentBottom="false"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentRight="false"
+        android:layout_weight="0.51"
+        android:layout_below="@+id/scrollView">
+
+        <Button
+            android:id="@+id/btn_filter"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:text="New Button"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/btn_mltchoice"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.12"
+            android:text="New Button" />
+
+        <Button
+            android:id="@+id/btn_allin"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:text="New Button" />
     </LinearLayout>
 
 </RelativeLayout>
