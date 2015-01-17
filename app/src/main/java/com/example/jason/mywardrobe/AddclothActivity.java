@@ -37,6 +37,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class AddclothActivity extends ActionBarActivity {
@@ -171,9 +173,18 @@ public class AddclothActivity extends ActionBarActivity {
         intent.putExtra("outputX", 340);
         intent.putExtra("outputY",340);
         intent.putExtra("return-data", true);
-        File f = new File(android.os.Environment
-                .getExternalStorageDirectory(), "temp2.jpg");
+        File dir=new File(Environment.getExternalStorageDirectory(),"MyWardrobe"+File.separator+"clothes");
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd_HHmmss");
+        Date date = new Date(System.currentTimeMillis());
+        filename = format.format(date);
+        File f = new File(dir.getPath(), filename+".jpg");
+
+
         imageUri=Uri.fromFile(f);
+
         intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
         return intent;
     }
