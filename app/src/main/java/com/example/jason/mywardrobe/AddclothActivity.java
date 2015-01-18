@@ -11,6 +11,9 @@ import android.os.Bundle;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -56,8 +59,10 @@ public class AddclothActivity extends ActionBarActivity {
     private static final int CAMERA_WITH_DATA = 3023;
     private static final int IMAGE_FROM_GALLERY = 3024;
     private Spinner color;
-    private Spinner fab;
+    private Spinner kind;
+    private Spinner texture;
     private Spinner use;
+    private Spinner type;
     private EditText name;
     private Button  send;
     @Override
@@ -65,10 +70,66 @@ public class AddclothActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addcloth);
 
+
+
+
         myImage = (ImageView)findViewById(R.id.myimage);
+        kind=(Spinner)findViewById(R.id.spkind);
+        String[] kinds = getResources().getStringArray(R.array.kind);
+        ArrayAdapter<String> kindadapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, kinds);
+        kind.setAdapter(kindadapter);
+
+
+
         color=(Spinner)findViewById(R.id.spcolor);
-        fab=(Spinner)findViewById(R.id.sptype);
+        String[] colors = getResources().getStringArray(R.array.colors);
+        ArrayAdapter<String> coloradapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, colors);
+        color.setAdapter(coloradapter);
+
+        type=(Spinner)findViewById(R.id.sptype);
+        String[] uptypes = getResources().getStringArray(R.array.uptype);
+        final ArrayAdapter<String> uptypeadapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, uptypes);
+        String[] downtypes = getResources().getStringArray(R.array.downtype);
+        final ArrayAdapter<String> downtypeadapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, downtypes);
+        kind.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                int index =parent.getSelectedItemPosition();
+                if(index==0){
+                    type.setAdapter(uptypeadapter);
+                }else if(index==1){
+                    type.setAdapter(downtypeadapter);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+
         use=(Spinner)findViewById(R.id.spuse);
+        String[] uses = getResources().getStringArray(R.array.use);
+        ArrayAdapter<String>useadapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item,uses);
+        use.setAdapter(useadapter);
+
+
+        texture=(Spinner)findViewById(R.id.sptexture);
+        String[] textures = getResources().getStringArray(R.array.texture);
+        ArrayAdapter<String>textureadapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item,textures);
+        texture.setAdapter(textureadapter);
+
+
+
+
         send=(Button)findViewById(R.id.button);
 
 
