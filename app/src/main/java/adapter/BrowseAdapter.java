@@ -4,6 +4,7 @@ package adapter;
  * Created by jason on 2015/1/18.
  */
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.File;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
@@ -69,7 +71,8 @@ public class BrowseAdapter extends BaseAdapter{
 
         // Load image
         ImageView photoImg = (ImageView) view.findViewById(R.id.img_photo);
-/*
+        photoImg.setImageURI(Uri.fromFile(new File(clothes.getPath())));
+        /*
         try {
             restMgr.loadImage(restMgr.getResourceUrl(Image.class, question.getImageId()),
                     photoImg, null);
@@ -86,20 +89,10 @@ public class BrowseAdapter extends BaseAdapter{
         }
 */
         // Set clues
-       /* TextView clueTxt = ((TextView) view.findViewById(R.id.txt_clue));
-        List<Option> clues = question.getClues();
-        if(clues.size() > 0) {
-            StringBuilder clueStr = new StringBuilder(clues.get(0).getValue());
-            for (int i = 1; i < clues.size(); i++) {
-                clueStr.append(", ").append(clues.get(i).getValue());
-            }
-            clueTxt.setText(clueStr.toString());
-        } else {
-            clueTxt.setText("");
-        }
-*/
-
-
+        TextView desTxt = ((TextView) view.findViewById(R.id.txt_clue));
+        String description = clothes.getColor()+","+clothes.getUse();
+            StringBuilder desStr = new StringBuilder(description);
+            desTxt.setText(desStr.toString());
     }
 
 }

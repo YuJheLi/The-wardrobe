@@ -68,8 +68,8 @@ public class ClothesManager {
 
 
     }
-    public List<Clothes> getWardrobe() {
-        return Wardrobe;
+    public ArrayList<Clothes> getWardrobe() {
+        return (ArrayList)Wardrobe;
     }
 
 
