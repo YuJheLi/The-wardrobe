@@ -157,7 +157,7 @@
                 android:layout_width="80dp"
                 android:layout_height="45dp"
                 android:text="save"
-                android:id="@+id/button5"
+                android:id="@+id/addbtn"
                 android:layout_gravity="right"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
