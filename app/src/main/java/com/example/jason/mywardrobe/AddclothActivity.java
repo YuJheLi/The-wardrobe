@@ -46,6 +46,9 @@ import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import manager.ClothesManager;
+import model.Clothes;
+
 
 public class AddclothActivity extends ActionBarActivity {
 
@@ -65,6 +68,9 @@ public class AddclothActivity extends ActionBarActivity {
     private Spinner type;
     private EditText name;
     private Button  send;
+    private ArrayAdapter<String> uptypeadapter;
+    private ArrayAdapter<String> downtypeadapter;
+    private int index;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +81,7 @@ public class AddclothActivity extends ActionBarActivity {
 
         myImage = (ImageView)findViewById(R.id.myimage);
         kind=(Spinner)findViewById(R.id.spkind);
+        name=(EditText)findViewById(R.id.clothename);
         String[] kinds = getResources().getStringArray(R.array.kind);
         ArrayAdapter<String> kindadapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, kinds);
@@ -90,15 +97,15 @@ public class AddclothActivity extends ActionBarActivity {
 
         type=(Spinner)findViewById(R.id.sptype);
         String[] uptypes = getResources().getStringArray(R.array.uptype);
-        final ArrayAdapter<String> uptypeadapter = new ArrayAdapter<String>(this,
+        uptypeadapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, uptypes);
         String[] downtypes = getResources().getStringArray(R.array.downtype);
-        final ArrayAdapter<String> downtypeadapter = new ArrayAdapter<String>(this,
+        downtypeadapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, downtypes);
         kind.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                int index =parent.getSelectedItemPosition();
+                index =parent.getSelectedItemPosition();
                 if(index==0){
                     type.setAdapter(uptypeadapter);
                 }else if(index==1){
@@ -111,6 +118,7 @@ public class AddclothActivity extends ActionBarActivity {
 
             }
         });
+
 
 
 
@@ -130,13 +138,52 @@ public class AddclothActivity extends ActionBarActivity {
 
 
 
-        send=(Button)findViewById(R.id.button);
+        send=(Button)findViewById(R.id.addbtn);
+        send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                if(imageUri!=null) {
+                    String namess = name.getText().toString();
+                    String colorss = getResources().getStringArray(R.array.colors)[color.getSelectedItemPosition()];
+                    String kindss = getResources().getStringArray(R.array.kind)[kind.getSelectedItemPosition()];
+                    String usess = getResources().getStringArray(R.array.use)[use.getSelectedItemPosition()];
+                    String texturess = getResources().getStringArray(R.array.texture)[texture.getSelectedItemPosition()];
+                    String typess;
+                    if (index == 0) {
+                        typess = getResources().getStringArray(R.array.uptype)[type.getSelectedItemPosition()];
+                    } else {
+                        typess = getResources().getStringArray(R.array.downtype)[type.getSelectedItemPosition()];
+                    }
+
+                    try {
+                        ClothesManager manager = new ClothesManager();
+                        Log.d(TAG, "manager");
+                        Clothes cloth = new Clothes( imageUri.getPath(), namess, kindss, typess, colorss, usess, texturess);
+                        Log.d(TAG, "addsuccess");
+                        manager.addclothes(cloth);
+                        finish();
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+
+
+
+
+            }
+        });
 
 
 
     }
 
+    public void ss(){
 
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

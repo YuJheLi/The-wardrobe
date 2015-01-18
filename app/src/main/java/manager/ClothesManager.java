@@ -1,13 +1,16 @@
 package manager;
 import android.os.Environment;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -31,12 +34,12 @@ public class ClothesManager {
     private String paraent_path;
     private Gson gson;
     public ClothesManager() throws IOException {
-        gson=new Gson();
-
-        File savecloth=new File(Environment.getExternalStorageDirectory(),"MyWardrobe"+File.separator+"cloth.txt");
 
 
-        Type listOfTestObject = new TypeToken<ArrayList<Clothes>>(){}.getType();
+        File savecloth=new File(Environment.getExternalStorageDirectory(),"MyWardrobe"+File.separator+"clothes.txt");
+
+
+
         if(!savecloth.exists())
         {   savecloth.getParentFile().mkdirs();
             try {
@@ -46,16 +49,67 @@ public class ClothesManager {
             }
         }
         paraent_path=savecloth.getPath();
-        Reader isReader = new InputStreamReader( new FileInputStream((savecloth.getPath()) ) );
+        derive();
 
-        Wardrobe = Collections.synchronizedList(
-                (ArrayList<Clothes>) gson.fromJson(isReader, listOfTestObject)
-        );
-        isReader.close();
 
     }
-    public void addclothes(Clothes cloth){
+    public void derive() throws IOException {
+
+        gson=new Gson();
+
+        Reader isReader = new InputStreamReader( new FileInputStream(( paraent_path) ) );
+        BufferedReader bufferedReader = new BufferedReader(isReader);
+        StringBuilder sb = new StringBuilder();
+        String line;
+        while ((line = bufferedReader.readLine()) != null) {
+            sb.append(line);
+        }
+        String json = sb.toString();
+        Log.d("464",json);
+        //FileReader fr = new FileReader(paraent_path);
+
+        //BufferedReader br = new BufferedReader(fr);
+
+        //convert the json string back to object
+
+
+
+        Type listOfTestObject = new TypeToken<ArrayList<Clothes>>(){}.getType();
+        if(json.isEmpty()) {
+            Wardrobe = new ArrayList<Clothes>();
+        }
+        else{
+           Wardrobe = gson.fromJson(json, new TypeToken<ArrayList<Clothes>>() {}.getType());
+
+        }
+        try {
+            isReader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
+        //new Gson().fromJson(fr, listOfTestObject);
+
+        //BufferedReader buffered = new BufferedReader(fr);
+
+        //list = (List<Clothes>) gson.fromJson(buffered, Clothes.class);
+
+        //Wardrobe=new ArrayList<Clothes>();
+
+
+        Log.d("Manager","readsuccess");
+
+
+
+    }
+    public void addclothes(Clothes cloth) throws IOException {
+        Log.d("Manager", "");
         Wardrobe.add(cloth);
+        Log.d("Manager","addsuccess");
+        saveall();
+        Log.d("Manager","save_success");
 
 
 
@@ -64,6 +118,8 @@ public class ClothesManager {
         Writer osWriter = new OutputStreamWriter( new FileOutputStream(paraent_path));
 
         gson.toJson(Wardrobe, osWriter);
+        Log.d("saveall","save_success");
+
         osWriter.close();
 
 

@@ -8,7 +8,7 @@ import android.net.Uri;
  * Created by Jack 李宇哲 on 2015/1/18.
  */
 public class Clothes {
-    private Uri uri;
+
     private String path;
     private String type;
     private String name;
@@ -18,8 +18,8 @@ public class Clothes {
     private String kind;
 
 
-    public Clothes(Uri uri1,String path1,String name1 ,String kind1,String type1,String color1,String use1,String texture1){
-        uri=uri1;
+    public Clothes(String path1,String name1 ,String kind1,String type1,String color1,String use1,String texture1){
+
         path=path1;
         name=name1;
         kind=kind1;
@@ -41,13 +41,7 @@ public class Clothes {
         this.kind = kind;
     }
 
-    public Uri getUri() {
-        return uri;
-    }
 
-    public void setUri(Uri uri) {
-        this.uri = uri;
-    }
 
     public String getPath() {
         return path;
