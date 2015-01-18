@@ -4,7 +4,11 @@ package adapter;
  * Created by jason on 2015/1/18.
  */
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,7 +58,6 @@ public class BrowseAdapter extends BaseAdapter{
             inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
-
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.list_item_question, parent, false);
         }
@@ -71,7 +74,13 @@ public class BrowseAdapter extends BaseAdapter{
 
         // Load image
         ImageView photoImg = (ImageView) view.findViewById(R.id.img_photo);
-        photoImg.setImageURI(Uri.fromFile(new File(clothes.getPath())));
+        Log.d("path123", clothes.getPath());
+        Bitmap myImg = BitmapFactory.decodeFile(clothes.getPath());
+        Matrix matrix = new Matrix();
+        matrix.postRotate(0);
+        Bitmap rotated = Bitmap.createBitmap(myImg, 0, 0, myImg.getWidth(), myImg.getHeight(),
+                matrix, true);
+        photoImg.setImageBitmap(rotated);
         /*
         try {
             restMgr.loadImage(restMgr.getResourceUrl(Image.class, question.getImageId()),
@@ -90,7 +99,7 @@ public class BrowseAdapter extends BaseAdapter{
 */
         // Set clues
         TextView desTxt = ((TextView) view.findViewById(R.id.txt_clue));
-        String description = clothes.getColor()+","+clothes.getUse();
+        String description = clothes.getTexture()+","+clothes.getUse();
             StringBuilder desStr = new StringBuilder(description);
             desTxt.setText(desStr.toString());
     }

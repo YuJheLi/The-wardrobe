@@ -44,10 +44,15 @@ public class BrowseActivity extends ActionBarActivity implements
         } catch (IOException e) {
             e.printStackTrace();
         }
+        try {
+            clothesManager = new ClothesManager();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         clothesList = clothesManager.getWardrobe();
         browseAdapter = new BrowseAdapter(this, clothesList);
         clothesListView = (GridView) findViewById(R.id.list_question);
-        LayoutInflater layoutInflater = LayoutInflater.from(this);
+        //LayoutInflater layoutInflater = LayoutInflater.from(this);
         clothesListView.setAdapter(browseAdapter);
         //clothesListView.setEmptyView(view.findViewById(R.id.empty));
        // clothesListView.setOnItemClickListener(this);
