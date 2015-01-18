@@ -9,15 +9,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.jason.mywardrobe.BrowseActivity">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical"
-        android:weightSum="1">
-
-    </LinearLayout>
-
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -56,6 +47,13 @@
         android:layout_weight="0.51"
         android:layout_below="@+id/scrollView">
 
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignTop="@+id/buttonarea">
+
         <Button
             android:id="@+id/btn_filter"
             android:layout_width="wrap_content"
@@ -68,13 +66,18 @@
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_weight="0.12"
-            android:text="New Button" />
+            android:text="New Button"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
 
         <Button
             android:id="@+id/btn_allin"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
-            android:text="New Button" />
-    </LinearLayout>
+            android:text="New Button"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+    </RelativeLayout>
 
 </RelativeLayout>
