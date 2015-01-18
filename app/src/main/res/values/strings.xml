@@ -26,24 +26,65 @@
         <item>深藍</item>
         <item>水藍</item>
         <item>橘</item>
-        <item>其他</item>
+        <item>其它</item>
 
     </string-array>
     <string-array name="texture">
         <item>排汗</item>
         <item>牛仔</item>
-        <item></item>
-        <item>淺綠</item>
-        <item>紅</item>
-        <item>粉紅</item>
-        <item>紫</item>
-        <item>黑</item>
-        <item>深藍</item>
-        <item>水藍</item>
-        <item>橘</item>
-        <item>其他</item>
+        <item>棉</item>
+        <item>尼龍</item>
+        <item>真皮</item>
+        <item>其它</item>
 
     </string-array>
+    <string-array name="use">
+        <item>工作</item>
+        <item>打球</item>
+        <item>上課</item>
+        <item>約會</item>
+        <item>派對舞會</item>
+        <item>睡覺</item>
+        <item>旅遊</item>
+        <item>家裡輕便</item>
+        <item>其它</item>
+
+    </string-array>
+    <string-array name="uptype">
+        <item>襯衫</item>
+        <item>短袖T-shirt</item>
+        <item>毛衣</item>
+        <item>內衣</item>
+        <item>帽T</item>
+        <item>polo衫</item>
+        <item>背心</item>
+        <item>長袖T-shirt</item>
+        <item>其它</item>
+
+    </string-array>
+
+    <string-array name="downtype">
+        <item>牛仔長褲</item>
+        <item>棉長褲</item>
+        <item>休閒長褲</item>
+        <item>熱褲</item>
+        <item>球褲</item>
+        <item>7分短褲</item>
+        <item>5分短褲</item>
+        <item>其它</item>
+
+    </string-array>
+    <string-array name="kind">
+        <item>上半身</item>
+        <item>下半身</item>
+
+
+    </string-array>
+
+
+
+
+
 
 
 
