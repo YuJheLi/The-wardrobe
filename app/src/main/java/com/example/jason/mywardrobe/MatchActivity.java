@@ -135,6 +135,7 @@ public class MatchActivity extends ActionBarActivity {
                 }
             }
         });
+
         Button btn_clearBelow = (Button) findViewById(R.id.btn_clearBelow);
         Button btn_clearallTop = (Button) findViewById(R.id.btn_clearallTop);
         Button btn_clearallBelow = (Button) findViewById(R.id.btn_clearallBelow);
