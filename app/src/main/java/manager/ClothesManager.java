@@ -20,6 +20,7 @@ import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import model.Clothes;
@@ -33,31 +34,32 @@ public class ClothesManager {
     private List<Clothes> Wardrobe;
     private String paraent_path;
     private Gson gson;
+
     public ClothesManager() throws IOException {
 
 
-        File savecloth=new File(Environment.getExternalStorageDirectory(),"MyWardrobe"+File.separator+"clothes.txt");
+        File savecloth = new File(Environment.getExternalStorageDirectory(), "MyWardrobe" + File.separator + "clothes.txt");
 
 
-
-        if(!savecloth.exists())
-        {   savecloth.getParentFile().mkdirs();
+        if (!savecloth.exists()) {
+            savecloth.getParentFile().mkdirs();
             try {
                 savecloth.createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        paraent_path=savecloth.getPath();
+        paraent_path = savecloth.getPath();
         derive();
 
 
     }
+
     public void derive() throws IOException {
 
-        gson=new Gson();
+        gson = new Gson();
 
-        Reader isReader = new InputStreamReader( new FileInputStream(( paraent_path) ) );
+        Reader isReader = new InputStreamReader(new FileInputStream((paraent_path)));
         BufferedReader bufferedReader = new BufferedReader(isReader);
         StringBuilder sb = new StringBuilder();
         String line;
@@ -65,7 +67,7 @@ public class ClothesManager {
             sb.append(line);
         }
         String json = sb.toString();
-        Log.d("464",json);
+        Log.d("464", json);
         //FileReader fr = new FileReader(paraent_path);
 
         //BufferedReader br = new BufferedReader(fr);
@@ -73,13 +75,13 @@ public class ClothesManager {
         //convert the json string back to object
 
 
-
-        Type listOfTestObject = new TypeToken<ArrayList<Clothes>>(){}.getType();
-        if(json.isEmpty()) {
+        Type listOfTestObject = new TypeToken<ArrayList<Clothes>>() {
+        }.getType();
+        if (json.isEmpty()) {
             Wardrobe = new ArrayList<Clothes>();
-        }
-        else{
-           Wardrobe = gson.fromJson(json, new TypeToken<ArrayList<Clothes>>() {}.getType());
+        } else {
+            Wardrobe = gson.fromJson(json, new TypeToken<ArrayList<Clothes>>() {
+            }.getType());
 
         }
         try {
@@ -87,7 +89,6 @@ public class ClothesManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
 
 
         //new Gson().fromJson(fr, listOfTestObject);
@@ -99,43 +100,143 @@ public class ClothesManager {
         //Wardrobe=new ArrayList<Clothes>();
 
 
-        Log.d("Manager","readsuccess");
-
+        Log.d("Manager", "readsuccess");
 
 
     }
+
     public void addclothes(Clothes cloth) throws IOException {
         Log.d("Manager", "");
         Wardrobe.add(cloth);
-        Log.d("Manager","addsuccess");
+        Log.d("Manager", "addsuccess");
         saveall();
-        Log.d("Manager","save_success");
-
+        Log.d("Manager", "save_success");
 
 
     }
+
     public void saveall() throws IOException {
-        Writer osWriter = new OutputStreamWriter( new FileOutputStream(paraent_path));
+        Writer osWriter = new OutputStreamWriter(new FileOutputStream(paraent_path));
 
         gson.toJson(Wardrobe, osWriter);
-        Log.d("saveall","save_success");
+
 
         osWriter.close();
 
 
     }
+
     public ArrayList<Clothes> getWardrobe() {
-        return (ArrayList)Wardrobe;
+        ArrayList<Clothes> newlist=new ArrayList<Clothes>();
+        for (int i = 0; i < Wardrobe.size(); i++) {
+            newlist.add(Wardrobe.get(i));
+        }
+
+
+
+        return newlist;
     }
-    public void delete_cloth(){
+
+    public void delete_cloth(Clothes cloth) throws IOException {
+        for (int i = 0; i < Wardrobe.size(); i++) {
+            if(cloth.getPath().equals(Wardrobe.get(i).getPath())){
+                Wardrobe.remove(i);
+                File f=new File(Wardrobe.get(i).getPath());
+                f.delete();
+                break;
+            }
+        }
+        saveall();
 
 
     }
 
+    public ArrayList<Clothes> search(Clothes search_item) {
+
+        ArrayList<Clothes> Searchbox = new ArrayList<Clothes>();
+
+        for (int i = 0; i < Wardrobe.size(); i++) {
+            Searchbox.add(Wardrobe.get(i));
+        }
+        //1
+        if (!"".equals(search_item.getName())) {
+
+            Iterator<Clothes> iter = Searchbox.iterator();
+            while (iter.hasNext()) {
+                Clothes s = iter.next();
+                if (!s.getName().equals(search_item.getName())) {
+                    iter.remove();
+                }
+            }
+        }
+        //2
+        if (!"".equals(search_item.getKind())) {
+
+            Iterator<Clothes> iter = Searchbox.iterator();
+            while (iter.hasNext()) {
+                Clothes s = iter.next();
+                if (!s.getKind().equals(search_item.getKind())) {
+                    iter.remove();
+                }
+            }
+        }
+        //3
+        if (!"".equals(search_item.getColor())) {
+
+            Iterator<Clothes> iter = Searchbox.iterator();
+            while (iter.hasNext()) {
+                Clothes s = iter.next();
+                if (!s.getColor().equals(search_item.getColor())) {
+                    iter.remove();
+                }
+            }
+        }
+        //4
+        if (!"".equals(search_item.getType())) {
+
+            Iterator<Clothes> iter = Searchbox.iterator();
+            while (iter.hasNext()) {
+                Clothes s = iter.next();
+                if (!s.getType().equals(search_item.getType())) {
+                    iter.remove();
+                }
+            }
+        }
+        //5
+        if (!"".equals(search_item.getUse())) {
+
+            Iterator<Clothes> iter = Searchbox.iterator();
+            while (iter.hasNext()) {
+                Clothes s = iter.next();
+                if (!s.getUse().equals(search_item.getUse())) {
+                    iter.remove();
+                }
+            }
+        }
+        //6
+        if (!"".equals(search_item.getTexture())) {
+
+            Iterator<Clothes> iter = Searchbox.iterator();
+            while (iter.hasNext()) {
+                Clothes s = iter.next();
+                if (!s.getTexture().equals(search_item.getTexture())) {
+                    iter.remove();
+                }
+            }
+        }
+
+        Log.d("Size!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", String.valueOf(Searchbox.size()));
 
 
 
 
+
+
+
+        return  Searchbox;
+
+
+    }
 
 
 }

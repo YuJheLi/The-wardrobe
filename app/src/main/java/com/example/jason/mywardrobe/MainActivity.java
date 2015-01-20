@@ -23,6 +23,7 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().hide();
         Button btn = (Button) findViewById(R.id.button);
         btn.setOnClickListener(new Button.OnClickListener() {
             @Override

@@ -2,12 +2,14 @@ package model;
 
 import android.net.Uri;
 
+import java.io.Serializable;
 
 
 /**
  * Created by Jack 李宇哲 on 2015/1/18.
  */
-public class Clothes {
+public class Clothes implements Serializable {
+
 
     private String path;
     private String type;

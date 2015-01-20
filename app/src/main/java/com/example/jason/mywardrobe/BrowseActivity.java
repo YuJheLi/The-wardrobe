@@ -6,6 +6,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,21 +18,27 @@ import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import adapter.BrowseAdapter;
 import manager.ClothesManager;
 import model.Clothes;
+import model.DataWrapper;
 //import com.example.jason.mywardrobe.R;
 
 public class BrowseActivity extends ActionBarActivity implements
         AdapterView.OnItemClickListener {
+    private static final String TAG = "BrowseActivity";
 
 
     private OnFragmentInteractionListener mFragmentInteractionListener;
     private SwipeRefreshLayout swipeRefreshLayout;
     private ListView listView;
     private ArrayList<Clothes> resultClothes;
+    private ArrayList<Clothes> searchClothes;
     private ArrayList<Clothes> clothesList;
+    private ArrayList<Clothes> chooseClothes;
+
     private GridView clothesListView;
     private BrowseAdapter browseAdapter;
     private Button multichoose;
@@ -39,13 +46,14 @@ public class BrowseActivity extends ActionBarActivity implements
     private Button search;
     private boolean multi = false;
     private static final int CHOOSE_OVER = 1;
-    private static final int SEARCH_OVER = 2;
+    private static final int SEARCH_OVER = 2447;
     private static final int MATCH_OVER= 3;
     // private ListViewAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_browse);
+
         ClothesManager clothesManager = null;
         try {
             clothesManager = new ClothesManager();
@@ -55,6 +63,8 @@ public class BrowseActivity extends ActionBarActivity implements
 
         clothesList = clothesManager.getWardrobe();
         resultClothes=clothesManager.getWardrobe();
+        searchClothes=clothesManager.getWardrobe();
+
         browseAdapter = new BrowseAdapter(this, clothesList);
         clothesListView = (GridView) findViewById(R.id.list_question);
         //LayoutInflater layoutInflater = LayoutInflater.from(this);
@@ -64,7 +74,7 @@ public class BrowseActivity extends ActionBarActivity implements
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(BrowseActivity.this, "你選擇了" + (position + 1) + " 號圖片", Toast.LENGTH_SHORT).show();
 
-               // clothesListView.getChildAt(position).getBackground().setColorFilter(Color.GREEN, PorterDuff.Mode.DARKEN);
+
             }
         });
 
@@ -72,16 +82,20 @@ public class BrowseActivity extends ActionBarActivity implements
        choose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), ChooseActivity.class);
-                startActivity(intent);
+                Intent intent = new Intent(BrowseActivity.this, ChooseActivity.class);
+
+                DataWrapper data=new DataWrapper(searchClothes);
+                intent.putExtra("list", data);
+
+                startActivityForResult(intent, CHOOSE_OVER);
             }
         });
-        search=(Button)findViewById(R.id.btn_search);
-        search.setOnClickListener(new View.OnClickListener() {
+       search=(Button)findViewById(R.id.btn_search);
+       search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent_search=new Intent(v.getContext(),SearchActivity.class);
-                startActivityForResult(intent_search,SEARCH_OVER);
+                Intent intent_search=new Intent(BrowseActivity.this,SearchActivity.class);
+                startActivityForResult(intent_search, SEARCH_OVER);
 
             }
         });
@@ -113,9 +127,7 @@ public class BrowseActivity extends ActionBarActivity implements
         return super.onOptionsItemSelected(item);
     }
 
-    public void onRefresh() {
 
-}
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -135,23 +147,44 @@ public class BrowseActivity extends ActionBarActivity implements
 
                 //String path = getPathFromCamera(data);
 
-               // Intent intent = new Intent(this, ChooseClothesActivity.class);
+                 // Intent intent = new Intent(this, ChooseClothesActivity.class);
                 //intent.putExtra("clothes", resultClothes);
                 //startActivityForResult(intent, CREATE_NEW_QUESTION);
+                Log.d(TAG,"chooseover");
+                DataWrapper dw=(DataWrapper)data.getSerializableExtra("chooselist");
 
-                //} else if (requestCode == IMAGE_FROM_GALLERY) {
-
-
-                //} else if (requestCode == CREATE_NEW_QUESTION) {
-
+                Log.d(TAG,"choose success");
 
 
-        }
-
-        } else if (responseCode == SEARCH_OVER) {
+               chooseClothes = dw.getParliaments();
 
 
-        }else if (responseCode == MATCH_OVER) {
+
+
+            }else if (requestCode == SEARCH_OVER) {
+                Log.d(TAG,"inin");
+                DataWrapper dw=(DataWrapper)data.getSerializableExtra("list");
+
+                Log.d(TAG,"search success");
+
+
+                searchClothes = dw.getParliaments();
+                browseAdapter.dataset(searchClothes);
+                //browseAdapter = new BrowseAdapter(this,  searchClothes);
+
+                //LayoutInflater layoutInflater = LayoutInflater.from(this);
+               // clothesListView.setAdapter(browseAdapter);
+
+
+
+
+            }else if (requestCode == MATCH_OVER) {
+
+
+            }
+
+        }else if(responseCode == RESULT_CANCELED){
+
 
 
         }

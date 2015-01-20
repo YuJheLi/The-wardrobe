@@ -119,7 +119,7 @@ public class ChooseAdapter extends BaseAdapter {
             array[2] = new BitmapDrawable(bitmap2);
             la= new LayerDrawable(array);
             la.setLayerInset(0, 0, 0, 0, 0);
-            la.setLayerInset(1, 20, 20, 20, 20);   
+            la.setLayerInset(1, 20, 20, 20, 20);
             la.setLayerInset(2, 20, 20, 300, 300);
 
         }
@@ -151,6 +151,23 @@ public class ChooseAdapter extends BaseAdapter {
     {
         isChice[post]=false;
         this.notifyDataSetChanged();
+    }
+   public boolean[] getchoose(){
+       return isChice;
+
+   }
+    public int number(){
+        int n=0;
+        for (int i = 0; i < clothesList.size(); i++) {
+            if(isChice[i]==true){
+                n++;
+
+
+            }
+        }
+        return n;
+
+
     }
 
 
