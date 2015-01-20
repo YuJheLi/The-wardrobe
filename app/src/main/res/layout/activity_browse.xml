@@ -12,7 +12,8 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/itemarea">
+        android:layout_below="@+id/itemarea"
+        android:id="@+id/relativeLayout2">
 
         <Button
             android:id="@+id/btn_search"
@@ -26,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.12"
-            android:text="全部加入搭配"
+            android:text="全部衣物"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/btn_search"
             android:layout_toEndOf="@+id/btn_search" />
@@ -35,7 +36,7 @@
             android:id="@+id/btn_multi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="選取搭配"
+            android:text="選取"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />

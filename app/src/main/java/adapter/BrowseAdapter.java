@@ -6,7 +6,12 @@ package adapter;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Matrix;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
+import android.graphics.drawable.ShapeDrawable;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,6 +28,7 @@ import java.util.List;
 import com.example.jason.mywardrobe.R;
 import model.Clothes;
 
+@SuppressWarnings("ALL")
 public class BrowseAdapter extends BaseAdapter{
     private static final String TAG = BrowseAdapter.class.getSimpleName();
 
@@ -73,14 +79,26 @@ public class BrowseAdapter extends BaseAdapter{
         Clothes clothes = getItem(position);
 
         // Load image
-        ImageView photoImg = (ImageView) view.findViewById(R.id.img_photo);
+        ImageView photoImg = (ImageView) view.findViewById(R.id.image_see);
         Log.d("path123", clothes.getPath());
         Bitmap myImg = BitmapFactory.decodeFile(clothes.getPath());
         Matrix matrix = new Matrix();
         matrix.postRotate(0);
         Bitmap rotated = Bitmap.createBitmap(myImg, 0, 0, myImg.getWidth(), myImg.getHeight(),
                 matrix, true);
-        photoImg.setImageBitmap(rotated);
+
+        Drawable[] array = new Drawable[2];
+
+        ShapeDrawable border = new ShapeDrawable();
+        border.getPaint().setColor(Color.LTGRAY);
+        array[0]=border;
+        array[1] = new BitmapDrawable(rotated);
+        LayerDrawable la=null;
+        la= new LayerDrawable(array);
+
+        la.setLayerInset(0, 0, 0, 0, 0);
+        la.setLayerInset(1, 20, 20, 20, 20);
+        photoImg.setImageDrawable(la);
         /*
         try {
             restMgr.loadImage(restMgr.getResourceUrl(Image.class, question.getImageId()),
@@ -102,6 +120,11 @@ public class BrowseAdapter extends BaseAdapter{
         String description = clothes.getTexture()+","+clothes.getUse();
             StringBuilder desStr = new StringBuilder(description);
             desTxt.setText(desStr.toString());
+    }
+    public void dataset(ArrayList<Clothes> box)
+    {
+       clothesList=box;
+        this.notifyDataSetChanged();
     }
 
 }

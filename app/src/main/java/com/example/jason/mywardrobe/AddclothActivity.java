@@ -86,9 +86,6 @@ public class AddclothActivity extends ActionBarActivity {
         ArrayAdapter<String> kindadapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, kinds);
         kind.setAdapter(kindadapter);
-
-
-
         color=(Spinner)findViewById(R.id.spcolor);
         String[] colors = getResources().getStringArray(R.array.colors);
         ArrayAdapter<String> coloradapter = new ArrayAdapter<String>(this,

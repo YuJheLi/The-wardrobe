@@ -1,13 +1,16 @@
 package com.example.jason.mywardrobe;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.TextView;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,18 +19,23 @@ import adapter.BrowseAdapter;
 import adapter.ChooseAdapter;
 import manager.ClothesManager;
 import model.Clothes;
+import model.DataWrapper;
 
 
 public class ChooseActivity extends ActionBarActivity {
     private ChooseAdapter ccadpter;
+    private static final String TAG = "ChooseActivity";
 
 
     private ArrayList<Clothes> resultClothes;
     private ArrayList<Clothes> clothesList;
     private GridView clothesListView;
-    private BrowseAdapter browseAdapter;
+    private boolean[] choosenumber;
+
     private Button chooseall;
     private Button choosecancell;
+    private Button addtomatch;
+    private TextView number;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +48,15 @@ public class ChooseActivity extends ActionBarActivity {
             e.printStackTrace();
         }
 
-        clothesList = clothesManager.getWardrobe();
+        DataWrapper dw=(DataWrapper)getIntent().getSerializableExtra("list");
+
+        Log.d(TAG, "search success");
+
+
+        clothesList = dw.getParliaments();
+
+
+
 
         clothesListView=(GridView) findViewById(R.id.choose_grid);
         ccadpter=new ChooseAdapter( clothesList , this);
@@ -50,6 +66,7 @@ public class ChooseActivity extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ccadpter.chiceState(position);
+                number.setText(formatString(ccadpter.number()));
             }
         });
         chooseall=(Button)findViewById(R.id.btn_all);
@@ -59,6 +76,7 @@ public class ChooseActivity extends ActionBarActivity {
                 for (int i = 0; i < clothesList.size(); i++) {
                     ccadpter.alltrue(i);
                 }
+                number.setText(formatString(ccadpter.number()));
             }
         });
         choosecancell=(Button)findViewById(R.id.btn_cancel);
@@ -69,14 +87,44 @@ public class ChooseActivity extends ActionBarActivity {
                 for (int i = 0; i < clothesList.size(); i++) {
                     ccadpter.allfalse(i);
                 }
+                number.setText(formatString(ccadpter.number()));
+            }
+        });
+        addtomatch=(Button)findViewById(R.id.btn_addtomatch);
+        addtomatch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                resultClothes=new ArrayList<Clothes>();
+                choosenumber=ccadpter.getchoose();
+                for (int i = 0; i < clothesList.size(); i++) {
+                   if(choosenumber[i]==true){
+                       resultClothes.add(clothesList.get(i));
+
+                   }
+                }
+
+
+
+
+
+                Intent in=new Intent();
+                DataWrapper data=new DataWrapper(resultClothes);
+                in.putExtra("chooselist", data);
+
+                setResult(RESULT_OK,in);
+                finish();
             }
         });
 
 
 
 
+     number=(TextView)findViewById(R.id.numbergg);
+        number.setText(formatString(ccadpter.number()));
     }
-
+    private String formatString(int count) {
+        return String.format(getString(R.string.selection), count);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
