@@ -127,6 +127,10 @@ public class ClothesManager {
     public ArrayList<Clothes> getWardrobe() {
         return (ArrayList)Wardrobe;
     }
+    public void delete_cloth(){
+
+
+    }
 
 
 
