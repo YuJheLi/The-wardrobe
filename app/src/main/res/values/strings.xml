@@ -13,7 +13,6 @@
     <string name="title_activity_test">test</string>
     <string name="title_activity_match">MatchActivity</string>
 
-
     <string-array name="colors">
         <item>白</item>
         <item>黃</item>
@@ -27,7 +26,6 @@
         <item>水藍</item>
         <item>橘</item>
         <item>其它</item>
-
     </string-array>
     <string-array name="texture">
         <item>排汗</item>
@@ -36,7 +34,6 @@
         <item>尼龍</item>
         <item>真皮</item>
         <item>其它</item>
-
     </string-array>
     <string-array name="use">
         <item>工作</item>
@@ -48,7 +45,6 @@
         <item>旅遊</item>
         <item>家裡輕便</item>
         <item>其它</item>
-
     </string-array>
     <string-array name="uptype">
         <item>襯衫</item>
@@ -60,9 +56,7 @@
         <item>背心</item>
         <item>長袖T-shirt</item>
         <item>其它</item>
-
     </string-array>
-
     <string-array name="downtype">
         <item>牛仔長褲</item>
         <item>棉長褲</item>
@@ -72,21 +66,17 @@
         <item>7分短褲</item>
         <item>5分短褲</item>
         <item>其它</item>
-
     </string-array>
     <string-array name="kind">
         <item>上半身</item>
         <item>下半身</item>
-
-
     </string-array>
 
-
-
-
-
-
-
-
+    <string name="title_activity_search">SearchActivity</string>
+    <string name="title_activity_choose_clothes">ChooseClothesActivity</string>
+    <string name="selection">選中%s個</string>
+    <string name="select_all">全選</string>
+    <string name="unselect_all">全不選</string>
+    <string name="title_activity_choose">ChooseActivity</string>
 
 </resources>

@@ -181,9 +181,7 @@ public class AddclothActivity extends ActionBarActivity {
 
     }
 
-    public void ss(){
 
-    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -352,6 +350,7 @@ public class AddclothActivity extends ActionBarActivity {
               String path = getPathFromGallery(data);
                 //Log.d(TAG, path);
                 imageUri=data.getData();
+
 
 
 
