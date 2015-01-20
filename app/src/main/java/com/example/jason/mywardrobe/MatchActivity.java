@@ -5,13 +5,21 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import model.Clothes;
+
 
 public class MatchActivity extends ActionBarActivity {
 
+    private  List<Clothes> clothesList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_match);
+        clothesList = new ArrayList<Clothes>();
+
     }
 
 
