@@ -1,5 +1,7 @@
 package com.example.jason.mywardrobe;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -35,6 +37,7 @@ public class ChooseActivity extends ActionBarActivity {
     private Button chooseall;
     private Button choosecancell;
     private Button addtomatch;
+    private Button deletechoose;
     private TextView number;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,6 +118,15 @@ public class ChooseActivity extends ActionBarActivity {
                 }
             }
         });
+        deletechoose=(Button)findViewById(R.id.deletebtn);
+        deletechoose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(ccadpter.number()!=0) {
+                    deletetfiles();
+                }
+            }
+        });
 
 
 
@@ -122,6 +134,54 @@ public class ChooseActivity extends ActionBarActivity {
      number=(TextView)findViewById(R.id.numbergg);
         number.setText(formatString(ccadpter.number()));
     }
+    public void deletetfiles(){
+
+        AlertDialog.Builder ad=new AlertDialog.Builder(ChooseActivity.this);
+
+        ad.setTitle(R.string.dialog_delete);
+
+        ad.setMessage(R.string.dialog_deletesome);
+
+        ad.setPositiveButton(R.string.dialog_yes, new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int i) {
+                resultClothes=new ArrayList<Clothes>();
+                choosenumber=ccadpter.getchoose();
+                for (int j = 0; j < clothesList.size(); j++) {
+                    if(choosenumber[j]==true){
+                        resultClothes.add(clothesList.get(j));
+                    }
+                }
+                if(!resultClothes.isEmpty()){
+                    Intent in=new Intent();
+                    DataWrapper data=new DataWrapper(resultClothes);
+                    in.putExtra("deletelist", data);
+
+                    setResult(5566,in);
+                    finish();
+                }
+
+
+
+            }
+
+        });
+
+        ad.setNegativeButton(R.string.dialog_no,new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int i) {
+
+            }
+
+        });
+
+        ad.show();//顯示訊息視窗
+
+    }
+
+
+
+
     private String formatString(int count) {
         return String.format(getString(R.string.selection), count);
     }

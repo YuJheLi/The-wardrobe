@@ -47,7 +47,8 @@
             android:layout_alignParentTop="false"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal|top"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:id="@+id/linearLayout">
 
             <ImageView
                 android:id="@+id/title"
@@ -56,6 +57,24 @@
                 android:src="@drawable/title"
                 android:layout_gravity="center_horizontal" />
         </LinearLayout>
+
+        <Button
+
+            android:id="@+id/mybox"
+            android:text="搭配 BOX"
+            android:textColor="#FFFFFF"
+            android:textSize="26sp"
+
+            android:layout_width="180dp"
+            android:layout_height="60dp"
+            android:background="@drawable/buttonshape"
+            android:shadowColor="#6681A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5"
+            android:layout_gravity="right|top"
+            android:layout_below="@+id/frameLayout"
+            android:layout_centerHorizontal="true" />
 
     </RelativeLayout>
 
@@ -66,20 +85,18 @@
 
         <Button
             android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="匯入衣服"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="裝扮庫"
-            android:id="@+id/mybox"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
+            android:text="匯入衣服"
+            android:textColor="#0C1710"
+            android:textSize="32sp"
+
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:background="@drawable/buttonshape"
+            android:shadowColor="#A8A8A8"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="5" />
 
         <Button
             android:layout_width="wrap_content"

@@ -29,7 +29,7 @@ import model.Clothes;
 
 @SuppressWarnings("deprecation")
 public class ChooseAdapter extends BaseAdapter {
-    private int[] image;
+
     private boolean isChice[];
     private Context context;
     private ArrayList<Clothes> clothesList;

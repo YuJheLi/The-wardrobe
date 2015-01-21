@@ -98,7 +98,7 @@ public class MatchesManager {
 
         return newlist;
     }
-    public void delete_cloth(Matches match) throws IOException {
+    public void delete_match(Matches match) throws IOException {
         for (int i = 0; i < Matchbox.size(); i++) {
             if(match.getClothes_path().equals(Matchbox.get(i).getClothes_path())&&match.getPants_path().equals(Matchbox.get(i).getPants_path())){
 

@@ -57,16 +57,16 @@ public class SearchActivity extends ActionBarActivity {
                 android.R.layout.simple_spinner_item, kinds);
         kind.setAdapter(kindadapter);
         color=(Spinner)findViewById(R.id.search_color);
-        String[] colors = getResources().getStringArray(R.array.colors);
+        String[] colors = getResources().getStringArray(R.array.colors2);
         ArrayAdapter<String> coloradapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, colors);
         color.setAdapter(coloradapter);
 
         type=(Spinner)findViewById(R.id.search_type);
-        String[] uptypes = getResources().getStringArray(R.array.uptype);
+        String[] uptypes = getResources().getStringArray(R.array.uptype2);
         uptypeadapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, uptypes);
-        String[] downtypes = getResources().getStringArray(R.array.downtype);
+        String[] downtypes = getResources().getStringArray(R.array.downtype2);
         downtypeadapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, downtypes);
         kind.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -90,14 +90,14 @@ public class SearchActivity extends ActionBarActivity {
 
 
         use=(Spinner)findViewById(R.id.search_use);
-        String[] uses = getResources().getStringArray(R.array.use);
+        String[] uses = getResources().getStringArray(R.array.use2);
         ArrayAdapter<String>useadapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item,uses);
         use.setAdapter(useadapter);
 
 
         texture=(Spinner)findViewById(R.id.search_texture);
-        String[] textures = getResources().getStringArray(R.array.texture);
+        String[] textures = getResources().getStringArray(R.array.texture2);
         ArrayAdapter<String>textureadapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item,textures);
         texture.setAdapter(textureadapter);
@@ -107,15 +107,15 @@ public class SearchActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 String namess = name.getText().toString();
-                String colorss = getResources().getStringArray(R.array.colors)[color.getSelectedItemPosition()];
+                String colorss = getResources().getStringArray(R.array.colors2)[color.getSelectedItemPosition()];
                 String kindss = getResources().getStringArray(R.array.kind)[kind.getSelectedItemPosition()];
-                String usess = getResources().getStringArray(R.array.use)[use.getSelectedItemPosition()];
-                String texturess = getResources().getStringArray(R.array.texture)[texture.getSelectedItemPosition()];
+                String usess = getResources().getStringArray(R.array.use2)[use.getSelectedItemPosition()];
+                String texturess = getResources().getStringArray(R.array.texture2)[texture.getSelectedItemPosition()];
                 String typess;
                 if (index == 0) {
-                    typess = getResources().getStringArray(R.array.uptype)[type.getSelectedItemPosition()];
+                    typess = getResources().getStringArray(R.array.uptype2)[type.getSelectedItemPosition()];
                 } else if(index==1){
-                    typess = getResources().getStringArray(R.array.downtype)[type.getSelectedItemPosition()];
+                    typess = getResources().getStringArray(R.array.downtype2)[type.getSelectedItemPosition()];
                 }else{
                     typess="";
                 }

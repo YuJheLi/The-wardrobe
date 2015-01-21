@@ -78,6 +78,15 @@ public class BrowseAdapter extends BaseAdapter{
 
         Clothes clothes = getItem(position);
 
+
+        Bitmap bitmap3 =null;
+        if(clothes.getKind().equals(context.getResources().getStringArray(R.array.kind)[0])) {
+            bitmap3 =BitmapFactory.decodeResource(context.getResources(),
+                    R.drawable.t_shirt_yellow);
+        }else{
+            bitmap3 = BitmapFactory.decodeResource(context.getResources(),
+                    R.drawable.pants);
+        }
         // Load image
         ImageView photoImg = (ImageView) view.findViewById(R.id.image_see);
         Log.d("path123", clothes.getPath());
@@ -87,17 +96,19 @@ public class BrowseAdapter extends BaseAdapter{
         Bitmap rotated = Bitmap.createBitmap(myImg, 0, 0, myImg.getWidth(), myImg.getHeight(),
                 matrix, true);
 
-        Drawable[] array = new Drawable[2];
+        Drawable[] array = new Drawable[3];
 
         ShapeDrawable border = new ShapeDrawable();
         border.getPaint().setColor(Color.LTGRAY);
         array[0]=border;
         array[1] = new BitmapDrawable(rotated);
+        array[2] = new BitmapDrawable(bitmap3);
         LayerDrawable la=null;
         la= new LayerDrawable(array);
 
         la.setLayerInset(0, 0, 0, 0, 0);
         la.setLayerInset(1, 20, 20, 20, 20);
+        la.setLayerInset(2, 0, 0, 350, 350);
         photoImg.setImageDrawable(la);
         /*
         try {

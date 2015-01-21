@@ -7,12 +7,14 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#ff804214"
     tools:context="com.example.jason.mywardrobe.BrowseActivity">
 
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/itemarea"
+        android:background="#ff804214"
         android:id="@+id/relativeLayout2">
 
         <Button
@@ -47,6 +49,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:background="#ff804214"
         android:id="@+id/itemarea"
         android:weightSum="1">
 

@@ -205,11 +205,11 @@ public class MatchActivity extends ActionBarActivity {
         btn_clearTop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(numTop<=1){
+                if(topList.size()<=1){
                     ImageButton imageButton = (ImageButton)findViewById(R.id.imgbtn_clothes);
                     if(topList.size()==1){
                         topList.remove(0);
-                        numTop=0;
+
                     }
                     //imageButton.setBackground(getResources().getDrawable(R.drawable.no_clothes));
                     imageButton.setImageResource(R.drawable.cart_empty);
@@ -266,7 +266,7 @@ public class MatchActivity extends ActionBarActivity {
         btn_clearBelow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(numBelow<=1){
+                if(belowList.size()<=1){
 
 
                     ImageButton imageButton = (ImageButton)findViewById(R.id.imgbtn_pants);

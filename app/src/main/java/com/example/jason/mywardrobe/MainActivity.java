@@ -18,12 +18,13 @@ import android.widget.ImageButton;
 
 
 public class MainActivity extends ActionBarActivity {
+    private Button mybox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        getSupportActionBar().hide();
+        setContentView(R.layout.activity_main);getSupportActionBar().hide();
+
         Button btn = (Button) findViewById(R.id.button);
         btn.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -37,6 +38,14 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(),BrowseActivity.class);
+                startActivity(intent);
+            }
+        });
+        mybox=(Button)findViewById(R.id.mybox);
+        mybox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(),CollectActivity.class);
                 startActivity(intent);
             }
         });

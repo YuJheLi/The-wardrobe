@@ -13,8 +13,67 @@
     <string name="title_activity_test">test</string>
     <string name="title_activity_match">MatchActivity</string>
 
+    <string-array name="colors2">
+        <item></item>
+        <item>白</item>
+        <item>黃</item>
+        <item>深綠</item>
+        <item>淺綠</item>
+        <item>紅</item>
+        <item>粉紅</item>
+        <item>紫</item>
+        <item>黑</item>
+        <item>深藍</item>
+        <item>水藍</item>
+        <item>橘</item>
+        <item>其它</item>
+    </string-array>
+    <string-array name="texture2">
+        <item></item>
+        <item>排汗</item>
+        <item>牛仔</item>
+        <item>棉</item>
+        <item>尼龍</item>
+        <item>真皮</item>
+        <item>其它</item>
+    </string-array>
+    <string-array name="use2">
+        <item></item>
+        <item>工作</item>
+        <item>打球</item>
+        <item>上課</item>
+        <item>約會</item>
+        <item>派對舞會</item>
+        <item>睡覺</item>
+        <item>旅遊</item>
+        <item>家裡輕便</item>
+        <item>其它</item>
+    </string-array>
+    <string-array name="uptype2">
+        <item></item>
+        <item>襯衫</item>
+        <item>短袖T-shirt</item>
+        <item>毛衣</item>
+        <item>內衣</item>
+        <item>帽T</item>
+        <item>polo衫</item>
+        <item>背心</item>
+        <item>長袖T-shirt</item>
+        <item>其它</item>
+    </string-array>
+    <string-array name="downtype2">
+        <item></item>
+        <item>牛仔長褲</item>
+        <item>棉長褲</item>
+        <item>休閒長褲</item>
+        <item>熱褲</item>
+        <item>球褲</item>
+        <item>7分短褲</item>
+        <item>5分短褲</item>
+        <item>其它</item>
+    </string-array>
+
     <string-array name="colors">
-        <item/>
         <item>白</item>
         <item>黃</item>
         <item>深綠</item>
@@ -29,7 +88,6 @@
         <item>其它</item>
     </string-array>
     <string-array name="texture">
-        <item/>
         <item>排汗</item>
         <item>牛仔</item>
         <item>棉</item>
@@ -38,7 +96,6 @@
         <item>其它</item>
     </string-array>
     <string-array name="use">
-        <item/>
         <item>工作</item>
         <item>打球</item>
         <item>上課</item>
@@ -50,7 +107,6 @@
         <item>其它</item>
     </string-array>
     <string-array name="uptype">
-        <item/>
         <item>襯衫</item>
         <item>短袖T-shirt</item>
         <item>毛衣</item>
@@ -62,7 +118,6 @@
         <item>其它</item>
     </string-array>
     <string-array name="downtype">
-        <item/>
         <item>牛仔長褲</item>
         <item>棉長褲</item>
         <item>休閒長褲</item>
@@ -72,6 +127,7 @@
         <item>5分短褲</item>
         <item>其它</item>
     </string-array>
+
     <string-array name="kind">
         <item>上半身</item>
         <item>下半身</item>
@@ -86,15 +142,16 @@
     <string name="dialog_repeat">已存在</string>
     <string name="dialog_repeat_exist">此搭配已存在</string>
     <string name="dialog_savematch">已儲存</string>
-    <string name="dialog_savematch_sucess">可至資瀏覽處查詢</string>
+    <string name="dialog_savematch_sucess">可至裝扮庫查詢</string>
     <string name="dialog_delete">刪除衣物</string>
     <string name="dialog_deletesure">確定要刪除此衣物?</string>
     <string name="dialog_deletesome">確定要刪除這些衣物?</string>
     <string name="title_activity_choose_clothes">選取多個衣物做搭配</string>
     <string name="selection">選中%s個</string>
+    <string name="boxselection">總共有%s個搭配</string>
     <string name="select_all">全選</string>
     <string name="unselect_all">全不選</string>
     <string name="title_activity_choose">選取多個衣物動作</string>
-    <string name="title_activity_collect">CollectActivity</string>
+    <string name="title_activity_collect">搭配Box</string>
 
 </resources>
