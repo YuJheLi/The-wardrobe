@@ -3,7 +3,12 @@ package com.example.jason.mywardrobe;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Matrix;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
+import android.graphics.drawable.ShapeDrawable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +25,7 @@ import model.Clothes;
 import model.DataWrapper;
 
 
+@SuppressWarnings("ALL")
 public class MatchActivity extends ActionBarActivity {
 
     private  ArrayList<Clothes> clothesList;
@@ -33,13 +39,14 @@ public class MatchActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         Log.d("here", "0");
         setContentView(R.layout.activity_match);
+        getSupportActionBar().hide();
         Log.d("here", "0.5");
         DataWrapper dw=(DataWrapper)getIntent().getSerializableExtra("chooselist");
         Log.d("here", "1");
         clothesList = dw.getParliaments();
         Log.d("here","1.5");
         for(Clothes clothes : clothesList){
-            if(clothes.getKind().equals("下半身"))belowList.add(clothes);
+            if(clothes.getKind().equals(getResources().getStringArray(R.array.kind)[1]))belowList.add(clothes);
             else topList.add(clothes);
         }
         Log.d("here", "2");
@@ -52,7 +59,7 @@ public class MatchActivity extends ActionBarActivity {
         btn_topImage.setImageBitmap(rotated);
 
         ImageButton btn_belowImage = (ImageButton) findViewById(R.id.imgbtn_pants);
-        Bitmap myImg2 = BitmapFactory.decodeFile(topList.get(0).getPath());
+        Bitmap myImg2 = BitmapFactory.decodeFile(belowList.get(0).getPath());
         Matrix matrix2 = new Matrix();
         matrix.postRotate(0);
         Bitmap rotated2 = Bitmap.createBitmap(myImg2, 0, 0, myImg.getWidth(), myImg.getHeight(),
@@ -71,7 +78,24 @@ public class MatchActivity extends ActionBarActivity {
                     Bitmap rotated = Bitmap.createBitmap(myImg, 0, 0, myImg.getWidth(), myImg.getHeight(),
                             matrix, true);
                     ImageButton imageButton = (ImageButton) findViewById(R.id.imgbtn_clothes);
-                    imageButton.setImageBitmap(rotated);
+                    //imageButton.setImageBitmap(rotated);
+
+
+
+                    Drawable[] array = new Drawable[2];
+
+                    ShapeDrawable border = new ShapeDrawable();
+                    border.getPaint().setColor(Color.LTGRAY);
+                    array[0]=border;
+                    array[1] = new BitmapDrawable(rotated);
+                    LayerDrawable la=null;
+                    la= new LayerDrawable(array);
+
+                    la.setLayerInset(0, 0, 0, 0, 0);
+                    la.setLayerInset(1, 20, 20, 20, 20);
+                    imageButton.setImageDrawable(la);
+
+
                 }
             }
         });
@@ -88,7 +112,20 @@ public class MatchActivity extends ActionBarActivity {
                     Bitmap rotated = Bitmap.createBitmap(myImg, 0, 0, myImg.getWidth(), myImg.getHeight(),
                             matrix, true);
                     ImageButton imageButton = (ImageButton)findViewById(R.id.imgbtn_pants);
-                    imageButton.setImageBitmap(rotated);
+                    //imageButton.setImageBitmap(rotated);
+                    Drawable[] array = new Drawable[2];
+
+                    ShapeDrawable border = new ShapeDrawable();
+                    border.getPaint().setColor(Color.LTGRAY);
+                    array[0]=border;
+                    array[1] = new BitmapDrawable(rotated);
+                    LayerDrawable la=null;
+                    la= new LayerDrawable(array);
+
+                    la.setLayerInset(0, 0, 0, 0, 0);
+                    la.setLayerInset(1, 20, 20, 20, 20);
+                    imageButton.setImageDrawable(la);
+
                 }
             }
         });
@@ -105,7 +142,19 @@ public class MatchActivity extends ActionBarActivity {
                     Bitmap rotated = Bitmap.createBitmap(myImg, 0, 0, myImg.getWidth(), myImg.getHeight(),
                             matrix, true);
                     ImageButton imageButton = (ImageButton) findViewById(R.id.imgbtn_clothes);
-                    imageButton.setImageBitmap(rotated);
+                    //imageButton.setImageBitmap(rotated);
+                    Drawable[] array = new Drawable[2];
+
+                    ShapeDrawable border = new ShapeDrawable();
+                    border.getPaint().setColor(Color.LTGRAY);
+                    array[0]=border;
+                    array[1] = new BitmapDrawable(rotated);
+                    LayerDrawable la=null;
+                    la= new LayerDrawable(array);
+
+                    la.setLayerInset(0, 0, 0, 0, 0);
+                    la.setLayerInset(1, 20, 20, 20, 20);
+                    imageButton.setImageDrawable(la);
                 }
             }
         });
@@ -122,7 +171,19 @@ public class MatchActivity extends ActionBarActivity {
                     Bitmap rotated = Bitmap.createBitmap(myImg, 0, 0, myImg.getWidth(), myImg.getHeight(),
                             matrix, true);
                     ImageButton imageButton = (ImageButton)findViewById(R.id.imgbtn_pants);
-                    imageButton.setImageBitmap(rotated);
+                    //imageButton.setImageBitmap(rotated);
+                    Drawable[] array = new Drawable[2];
+
+                    ShapeDrawable border = new ShapeDrawable();
+                    border.getPaint().setColor(Color.LTGRAY);
+                    array[0]=border;
+                    array[1] = new BitmapDrawable(rotated);
+                    LayerDrawable la=null;
+                    la= new LayerDrawable(array);
+
+                    la.setLayerInset(0, 0, 0, 0, 0);
+                    la.setLayerInset(1, 20, 20, 20, 20);
+                    imageButton.setImageDrawable(la);
                 }
             }
         });
@@ -131,7 +192,12 @@ public class MatchActivity extends ActionBarActivity {
         btn_clearTop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(numTop==topList.size()-1){
+                if(topList.size()==1){
+                    ImageButton imageButton = (ImageButton)findViewById(R.id.imgbtn_clothes);
+                    //imageButton.setBackground(getResources().getDrawable(R.drawable.no_clothes));
+                    imageButton.setImageResource(R.drawable.no_clothes);
+                }
+                else if(numTop==topList.size()-1 && topList.size()>1){
                     topList.remove(numTop);
                     numTop--;
                     Bitmap myImg = BitmapFactory.decodeFile(topList.get(numTop).getPath());
@@ -140,10 +206,41 @@ public class MatchActivity extends ActionBarActivity {
                     Bitmap rotated = Bitmap.createBitmap(myImg, 0, 0, myImg.getWidth(), myImg.getHeight(),
                             matrix, true);
                     ImageButton imageButton = (ImageButton) findViewById(R.id.imgbtn_clothes);
-                    imageButton.setImageBitmap(rotated);
+                    //imageButton.setImageBitmap(rotated);
+                    Drawable[] array = new Drawable[2];
+
+                    ShapeDrawable border = new ShapeDrawable();
+                    border.getPaint().setColor(Color.LTGRAY);
+                    array[0]=border;
+                    array[1] = new BitmapDrawable(rotated);
+                    LayerDrawable la=null;
+                    la= new LayerDrawable(array);
+
+                    la.setLayerInset(0, 0, 0, 0, 0);
+                    la.setLayerInset(1, 20, 20, 20, 20);
+                    imageButton.setImageDrawable(la);
                 }
-                else{
+                else {
                     topList.remove(numTop);
+                    Bitmap myImg = BitmapFactory.decodeFile(topList.get(numTop).getPath());
+                    Matrix matrix = new Matrix();
+                    matrix.postRotate(0);
+                    Bitmap rotated = Bitmap.createBitmap(myImg, 0, 0, myImg.getWidth(), myImg.getHeight(),
+                            matrix, true);
+                    ImageButton imageButton = (ImageButton) findViewById(R.id.imgbtn_clothes);
+                    //imageButton.setImageBitmap(rotated);
+                    Drawable[] array = new Drawable[2];
+
+                    ShapeDrawable border = new ShapeDrawable();
+                    border.getPaint().setColor(Color.LTGRAY);
+                    array[0]=border;
+                    array[1] = new BitmapDrawable(rotated);
+                    LayerDrawable la=null;
+                    la= new LayerDrawable(array);
+
+                    la.setLayerInset(0, 0, 0, 0, 0);
+                    la.setLayerInset(1, 20, 20, 20, 20);
+                    imageButton.setImageDrawable(la);
                 }
             }
         });
@@ -152,20 +249,60 @@ public class MatchActivity extends ActionBarActivity {
         btn_clearBelow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(numBelow==belowList.size()-1){
+                if(belowList.size()==1){
+                    ImageButton imageButton = (ImageButton)findViewById(R.id.imgbtn_pants);
+                    //imageButton.setBackground(getResources().getDrawable(R.drawable.no_clothes));
+                    imageButton.setImageResource(R.drawable.no_clothes);
+                    Log.d("sleepy",Integer.toString(numBelow));
+                }
+                else if(numBelow==belowList.size()-1 && belowList.size()>1){
+                    Log.d("sleepy2",Integer.toString(numBelow));
                     belowList.remove(numBelow);
-                    numTop--;
+                    numBelow--;
                     Bitmap myImg = BitmapFactory.decodeFile(belowList.get(numBelow).getPath());
                     Matrix matrix = new Matrix();
                     matrix.postRotate(0);
                     Bitmap rotated = Bitmap.createBitmap(myImg, 0, 0, myImg.getWidth(), myImg.getHeight(),
                             matrix, true);
                     ImageButton imageButton = (ImageButton)findViewById(R.id.imgbtn_pants);
-                    imageButton.setImageBitmap(rotated);
+                    //imageButton.setImageBitmap(rotated);
+                    Drawable[] array = new Drawable[2];
+
+                    ShapeDrawable border = new ShapeDrawable();
+                    border.getPaint().setColor(Color.LTGRAY);
+                    array[0]=border;
+                    array[1] = new BitmapDrawable(rotated);
+                    LayerDrawable la=null;
+                    la= new LayerDrawable(array);
+
+                    la.setLayerInset(0, 0, 0, 0, 0);
+                    la.setLayerInset(1, 20, 20, 20, 20);
+                    imageButton.setImageDrawable(la);
                 }
-                else{
+                else {
+                    Log.d("sleepy",Integer.toString(numBelow));
                     belowList.remove(numBelow);
+                    Bitmap myImg = BitmapFactory.decodeFile(belowList.get(numBelow).getPath());
+                    Matrix matrix = new Matrix();
+                    matrix.postRotate(0);
+                    Bitmap rotated = Bitmap.createBitmap(myImg, 0, 0, myImg.getWidth(), myImg.getHeight(),
+                            matrix, true);
+                    ImageButton imageButton = (ImageButton)findViewById(R.id.imgbtn_pants);
+                    //imageButton.setImageBitmap(rotated);
+                    Drawable[] array = new Drawable[2];
+
+                    ShapeDrawable border = new ShapeDrawable();
+                    border.getPaint().setColor(Color.LTGRAY);
+                    array[0]=border;
+                    array[1] = new BitmapDrawable(rotated);
+                    LayerDrawable la=null;
+                    la= new LayerDrawable(array);
+
+                    la.setLayerInset(0, 0, 0, 0, 0);
+                    la.setLayerInset(1, 20, 20, 20, 20);
+                    imageButton.setImageDrawable(la);
                 }
+
             }
         });
         Button btn_clearallTop = (Button) findViewById(R.id.btn_clearallTop);
@@ -173,6 +310,9 @@ public class MatchActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 topList.clear();
+                ImageButton imageButton = (ImageButton)findViewById(R.id.imgbtn_clothes);
+                //imageButton.setBackground(getResources().getDrawable(R.drawable.no_clothes));
+                imageButton.setImageResource(R.drawable.no_clothes);
             }
         });
         Button btn_clearallBelow = (Button) findViewById(R.id.btn_clearallBelow);
@@ -180,6 +320,9 @@ public class MatchActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 belowList.clear();
+                ImageButton imageButton = (ImageButton)findViewById(R.id.imgbtn_pants);
+                //imageButton.setBackground(getResources().getDrawable(R.drawable.no_clothes));
+                imageButton.setImageResource(R.drawable.no_clothes);
             }
         });
 
