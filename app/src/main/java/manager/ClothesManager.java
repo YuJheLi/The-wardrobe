@@ -67,7 +67,7 @@ public class ClothesManager {
             sb.append(line);
         }
         String json = sb.toString();
-        Log.d("464", json);
+
         //FileReader fr = new FileReader(paraent_path);
 
         //BufferedReader br = new BufferedReader(fr);
@@ -84,11 +84,9 @@ public class ClothesManager {
             }.getType());
 
         }
-        try {
-            isReader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+        isReader.close();
+        bufferedReader.close();
 
 
         //new Gson().fromJson(fr, listOfTestObject);
@@ -198,7 +196,7 @@ public class ClothesManager {
             Iterator<Clothes> iter = Searchbox.iterator();
             while (iter.hasNext()) {
                 Clothes s = iter.next();
-                if (!s.getType().equals(search_item.getType())) {
+                if (s.getType().equals(search_item.getType())) {
                     iter.remove();
                 }
             }

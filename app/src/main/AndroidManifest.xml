@@ -42,6 +42,10 @@
             android:name=".ChooseActivity"
             android:label="@string/title_activity_choose" >
         </activity>
+        <activity
+            android:name=".CollectActivity"
+            android:label="@string/title_activity_collect" >
+        </activity>
     </application>
 
 </manifest>
