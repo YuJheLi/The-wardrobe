@@ -80,6 +80,12 @@
     </string-array>
 
     <string name="title_activity_search">查詢相關衣物</string>
+    <string name="dialog_infor">詳細資訊</string>
+    <string name="dialog_OK">返回</string>
+    <string name="dialog_yes">是</string>
+    <string name="dialog_no">否</string>
+    <string name="dialog_delete">刪除衣物</string>
+    <string name="dialog_deletesure">確定要刪除此衣物?</string>
     <string name="title_activity_choose_clothes">選取多個衣物做搭配</string>
     <string name="selection">選中%s個</string>
     <string name="select_all">全選</string>

@@ -1,24 +1,40 @@
 package com.example.jason.mywardrobe;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Matrix;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
+import android.graphics.drawable.ShapeDrawable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import adapter.BrowseAdapter;
 import manager.ClothesManager;
@@ -26,6 +42,7 @@ import model.Clothes;
 import model.DataWrapper;
 //import com.example.jason.mywardrobe.R;
 
+@SuppressWarnings("ALL")
 public class BrowseActivity extends ActionBarActivity implements
         AdapterView.OnItemClickListener {
     private static final String TAG = "BrowseActivity";
@@ -35,15 +52,18 @@ public class BrowseActivity extends ActionBarActivity implements
     private SwipeRefreshLayout swipeRefreshLayout;
     private ListView listView;
     private ArrayList<Clothes> resultClothes;
+    private ArrayList<Clothes> matchClothes;
     private ArrayList<Clothes> searchClothes;
     private ArrayList<Clothes> clothesList;
     private ArrayList<Clothes> chooseClothes;
+    private Clothes delete;
 
     private GridView clothesListView;
     private BrowseAdapter browseAdapter;
-    private Button multichoose;
+
     private Button choose;
     private Button search;
+    private Button getall;
     private boolean multi = false;
     private static final int CHOOSE_OVER = 1;
     private static final int SEARCH_OVER = 2447;
@@ -64,15 +84,17 @@ public class BrowseActivity extends ActionBarActivity implements
         clothesList = clothesManager.getWardrobe();
         resultClothes=clothesManager.getWardrobe();
         searchClothes=clothesManager.getWardrobe();
+        matchClothes=new ArrayList<Clothes>();
 
-        browseAdapter = new BrowseAdapter(this, clothesList);
+        browseAdapter = new BrowseAdapter(this, searchClothes);
         clothesListView = (GridView) findViewById(R.id.list_question);
         //LayoutInflater layoutInflater = LayoutInflater.from(this);
         clothesListView.setAdapter(browseAdapter);
         clothesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(BrowseActivity.this, "你選擇了" + (position + 1) + " 號圖片", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(BrowseActivity.this, "你選擇了" + (position + 1) + " 號圖片", Toast.LENGTH_SHORT).show();
+                alert(searchClothes.get(position));
 
 
             }
@@ -99,10 +121,150 @@ public class BrowseActivity extends ActionBarActivity implements
 
             }
         });
+        getall=(Button)findViewById(R.id.btn_getall);
+        getall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                try {
+                    ClothesManager clothesManager = new ClothesManager();
+                    searchClothes=clothesManager.getWardrobe();
+                    browseAdapter.dataset(searchClothes);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
 
 
         //clothesListView.setEmptyView(view.findViewById(R.id.empty));
         // clothesListView.setOnItemClickListener(this);
+    }
+    public void deletedialod(){
+        AlertDialog.Builder ad=new AlertDialog.Builder(BrowseActivity.this);
+        ad.setTitle(R.string.dialog_delete);
+        ad.setMessage(R.string.dialog_deletesure);
+        ad.setPositiveButton(R.string.dialog_yes, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int i) {
+                ClothesManager clothesManager = null;
+                try {
+                    clothesManager = new ClothesManager();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    clothesManager.delete_cloth(delete);
+                    for(int k=0;k<searchClothes.size();k++){
+                        if(searchClothes.get(k).getPath().equals(delete.getPath())){
+                            searchClothes.remove(k);
+                            break;
+                        }
+
+                    }
+                    for(int k=0;k<matchClothes.size();k++){
+                        if(matchClothes.get(k).getPath().equals(delete.getPath())){
+                            matchClothes.remove(k);
+                            break;
+                        }
+
+                    }
+                    browseAdapter.dataset(searchClothes);
+
+
+
+
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+        });
+
+        ad.setNegativeButton(R.string.dialog_no,new DialogInterface.OnClickListener() { //按"否",則不執行任何操作
+
+            public void onClick(DialogInterface dialog, int i) {
+
+            }
+
+        });
+
+        ad.show();
+    }
+
+    public void alert( final Clothes cloth_infor){
+
+
+        AlertDialog.Builder alertadd = new AlertDialog.Builder(
+                BrowseActivity.this);
+        alertadd.setTitle(R.string.dialog_infor);
+
+        LayoutInflater factory = LayoutInflater.from(BrowseActivity.this);
+        final View view = factory.inflate(R.layout.browse_dialog, null);
+
+        ImageView dioimage= (ImageView) view.findViewById(R.id.dialog_image);
+        Bitmap myImg = BitmapFactory.decodeFile(cloth_infor.getPath());
+        Matrix matrix = new Matrix();
+        matrix.postRotate(0);
+        Bitmap rotated = Bitmap.createBitmap(myImg, 0, 0, myImg.getWidth(), myImg.getHeight(),
+                matrix, true);
+
+        Drawable[] array = new Drawable[2];
+
+        ShapeDrawable border = new ShapeDrawable();
+        border.getPaint().setColor(Color.LTGRAY);
+        array[0]=border;
+        array[1] = new BitmapDrawable(rotated);
+        LayerDrawable la=null;
+        la= new LayerDrawable(array);
+
+        la.setLayerInset(0, 0, 0, 0, 0);
+        la.setLayerInset(1, 20, 20, 20, 20);
+        dioimage.setImageDrawable(la);
+
+        TextView text1= (TextView) view.findViewById(R.id.dialog_name);
+        text1.setText(cloth_infor.getName());
+        TextView text2= (TextView) view.findViewById(R.id.dialog_kind);
+        text2.setText(cloth_infor.getKind());
+
+        TextView text3= (TextView) view.findViewById(R.id.dialog_color);
+        text3.setText(cloth_infor.getColor());
+
+        TextView text4= (TextView) view.findViewById(R.id.dialog_type);
+        text4.setText(cloth_infor.getType());
+
+        TextView text5= (TextView) view.findViewById(R.id.dialog_use);
+        text5.setText(cloth_infor.getUse());
+
+        TextView text6= (TextView) view.findViewById(R.id.dialog_texture);
+        text6.setText(cloth_infor.getTexture());
+
+
+
+
+
+        delete=cloth_infor;
+        alertadd.setView(view);
+        alertadd.setPositiveButton(R.string.dialog_OK, new DialogInterface.OnClickListener() {
+            // do something when the button is clicked
+            public void onClick(DialogInterface arg0, int arg1) {
+
+            }
+        });
+        alertadd.setNegativeButton(R.string.dialog_delete, new DialogInterface.OnClickListener() {
+            // do something when the button is clicked
+            public void onClick(DialogInterface arg0, int arg1) {
+
+                deletedialod();
+
+            }
+        });
+
+        alertadd.show();
+
     }
 
     @Override
@@ -145,6 +307,12 @@ public class BrowseActivity extends ActionBarActivity implements
 
             if (requestCode == CHOOSE_OVER) {
 
+
+
+
+
+
+
                 //String path = getPathFromCamera(data);
 
                  // Intent intent = new Intent(this, ChooseClothesActivity.class);
@@ -155,14 +323,36 @@ public class BrowseActivity extends ActionBarActivity implements
 
                 Log.d(TAG,"choose success");
 
-
                chooseClothes = dw.getParliaments();
+                for(int i=0;i<chooseClothes.size();i++){
+                    matchClothes.add(chooseClothes.get(i));
+                }
+
+                Set set = new TreeSet(new Comparator() {
+                    @Override
+                    public int compare(Object lhs, Object rhs) {
+                        Clothes s1=(Clothes)lhs;
+                        Clothes s2=(Clothes)rhs;
+                        if(s1.getPath().equalsIgnoreCase(s2.getPath())){
+                            return 0;
+                        }
+                        return 1;
+                    }
+                });
+                set.addAll( matchClothes);
+                ArrayList<Clothes> newList = new ArrayList(set);
+                matchClothes=newList;
+
+
+
+
+
 
                 Intent in=new Intent(BrowseActivity.this,MatchActivity.class);
-                DataWrapper datatoMatch=new DataWrapper(chooseClothes);
+                DataWrapper datatoMatch=new DataWrapper(matchClothes);
                 in.putExtra("chooselist", datatoMatch);
                 Log.d(TAG,"entering match");
-                startActivity(in);
+                startActivityForResult(in, MATCH_OVER);
 
 
 
@@ -185,7 +375,8 @@ public class BrowseActivity extends ActionBarActivity implements
 
 
             }else if (requestCode == MATCH_OVER) {
-
+                DataWrapper dw=(DataWrapper)data.getSerializableExtra("matchlist");
+                matchClothes = dw.getParliaments();
 
             }
 

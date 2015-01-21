@@ -1,5 +1,6 @@
 package com.example.jason.mywardrobe;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -27,9 +28,9 @@ import model.DataWrapper;
 @SuppressWarnings("ALL")
 public class MatchActivity extends ActionBarActivity {
 
-    private  List<Clothes> clothesList;
-    private  List<Clothes> topList = new ArrayList<Clothes>();
-    private  List<Clothes> belowList = new ArrayList<Clothes>();
+    private  ArrayList<Clothes> clothesList;
+    private  ArrayList<Clothes> topList = new ArrayList<Clothes>();
+    private  ArrayList<Clothes> belowList = new ArrayList<Clothes>();
     private  int numTop = 0;
     private  int numBelow = 0;
     @Override
@@ -349,4 +350,18 @@ public class MatchActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onBackPressed() {
+
+
+        Intent in=new Intent();
+        DataWrapper data=new DataWrapper(clothesList);
+        in.putExtra("matchlist", data);
+
+        setResult(RESULT_OK,in);
+        finish();
+
+    }
+
 }

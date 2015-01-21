@@ -140,9 +140,10 @@ public class ClothesManager {
     public void delete_cloth(Clothes cloth) throws IOException {
         for (int i = 0; i < Wardrobe.size(); i++) {
             if(cloth.getPath().equals(Wardrobe.get(i).getPath())){
+
+                File ffff=new File(Wardrobe.get(i).getPath());
+                ffff.delete();
                 Wardrobe.remove(i);
-                File f=new File(Wardrobe.get(i).getPath());
-                f.delete();
                 break;
             }
         }
