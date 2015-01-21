@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,26 +16,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Clothes;
+import model.DataWrapper;
 
 
 public class MatchActivity extends ActionBarActivity {
 
     private  List<Clothes> clothesList;
-    private  List<Clothes> topList;
-    private  List<Clothes> belowList;
+    private  List<Clothes> topList = new ArrayList<Clothes>();
+    private  List<Clothes> belowList = new ArrayList<Clothes>();
     private  int numTop = 0;
     private  int numBelow = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d("here", "-1");
         super.onCreate(savedInstanceState);
+        Log.d("here", "0");
         setContentView(R.layout.activity_match);
-        clothesList = new ArrayList<Clothes>();
-
+        Log.d("here", "0.5");
+        DataWrapper dw=(DataWrapper)getIntent().getSerializableExtra("chooselist");
+        Log.d("here", "1");
+        clothesList = dw.getParliaments();
+        Log.d("here","1.5");
         for(Clothes clothes : clothesList){
             if(clothes.getKind().equals("下半身"))belowList.add(clothes);
             else topList.add(clothes);
         }
-
+        Log.d("here", "2");
         ImageButton btn_topImage = (ImageButton) findViewById(R.id.imgbtn_clothes);
         Bitmap myImg = BitmapFactory.decodeFile(topList.get(0).getPath());
         Matrix matrix = new Matrix();
@@ -62,7 +69,7 @@ public class MatchActivity extends ActionBarActivity {
                     matrix.postRotate(0);
                     Bitmap rotated = Bitmap.createBitmap(myImg, 0, 0, myImg.getWidth(), myImg.getHeight(),
                             matrix, true);
-                    ImageButton imageButton = (ImageButton)v;
+                    ImageButton imageButton = (ImageButton) findViewById(R.id.imgbtn_clothes);
                     imageButton.setImageBitmap(rotated);
                 }
             }
@@ -79,7 +86,7 @@ public class MatchActivity extends ActionBarActivity {
                     matrix.postRotate(0);
                     Bitmap rotated = Bitmap.createBitmap(myImg, 0, 0, myImg.getWidth(), myImg.getHeight(),
                             matrix, true);
-                    ImageButton imageButton = (ImageButton)v;
+                    ImageButton imageButton = (ImageButton)findViewById(R.id.imgbtn_pants);
                     imageButton.setImageBitmap(rotated);
                 }
             }
@@ -96,7 +103,7 @@ public class MatchActivity extends ActionBarActivity {
                     matrix.postRotate(0);
                     Bitmap rotated = Bitmap.createBitmap(myImg, 0, 0, myImg.getWidth(), myImg.getHeight(),
                             matrix, true);
-                    ImageButton imageButton = (ImageButton)v;
+                    ImageButton imageButton = (ImageButton) findViewById(R.id.imgbtn_clothes);
                     imageButton.setImageBitmap(rotated);
                 }
             }
@@ -113,7 +120,7 @@ public class MatchActivity extends ActionBarActivity {
                     matrix.postRotate(0);
                     Bitmap rotated = Bitmap.createBitmap(myImg, 0, 0, myImg.getWidth(), myImg.getHeight(),
                             matrix, true);
-                    ImageButton imageButton = (ImageButton)v;
+                    ImageButton imageButton = (ImageButton)findViewById(R.id.imgbtn_pants);
                     imageButton.setImageBitmap(rotated);
                 }
             }
@@ -124,22 +131,56 @@ public class MatchActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 if(numTop==topList.size()-1){
+                    topList.remove(numTop);
                     numTop--;
                     Bitmap myImg = BitmapFactory.decodeFile(topList.get(numTop).getPath());
                     Matrix matrix = new Matrix();
                     matrix.postRotate(0);
                     Bitmap rotated = Bitmap.createBitmap(myImg, 0, 0, myImg.getWidth(), myImg.getHeight(),
                             matrix, true);
-                    ImageButton imageButton = (ImageButton)v;
+                    ImageButton imageButton = (ImageButton) findViewById(R.id.imgbtn_clothes);
                     imageButton.setImageBitmap(rotated);
+                }
+                else{
+                    topList.remove(numTop);
                 }
             }
         });
 
         Button btn_clearBelow = (Button) findViewById(R.id.btn_clearBelow);
+        btn_clearBelow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(numBelow==belowList.size()-1){
+                    belowList.remove(numBelow);
+                    numTop--;
+                    Bitmap myImg = BitmapFactory.decodeFile(belowList.get(numBelow).getPath());
+                    Matrix matrix = new Matrix();
+                    matrix.postRotate(0);
+                    Bitmap rotated = Bitmap.createBitmap(myImg, 0, 0, myImg.getWidth(), myImg.getHeight(),
+                            matrix, true);
+                    ImageButton imageButton = (ImageButton)findViewById(R.id.imgbtn_pants);
+                    imageButton.setImageBitmap(rotated);
+                }
+                else{
+                    belowList.remove(numBelow);
+                }
+            }
+        });
         Button btn_clearallTop = (Button) findViewById(R.id.btn_clearallTop);
+        btn_clearallTop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                topList.clear();
+            }
+        });
         Button btn_clearallBelow = (Button) findViewById(R.id.btn_clearallBelow);
-
+        btn_clearallBelow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                belowList.clear();
+            }
+        });
 
     }
 

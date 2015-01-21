@@ -158,6 +158,12 @@ public class BrowseActivity extends ActionBarActivity implements
 
                chooseClothes = dw.getParliaments();
 
+                Intent in=new Intent(BrowseActivity.this,MatchActivity.class);
+                DataWrapper datatoMatch=new DataWrapper(chooseClothes);
+                in.putExtra("chooselist", datatoMatch);
+                Log.d(TAG,"entering match");
+                startActivity(in);
+
 
 
 
