@@ -96,5 +96,6 @@
     <string name="unselect_all">全不選</string>
     <string name="title_activity_choose">選取多個衣物動作</string>
     <string name="title_activity_collect">CollectActivity</string>
+    <string name="title_activity_random">RandomActivity</string>
 
 </resources>
