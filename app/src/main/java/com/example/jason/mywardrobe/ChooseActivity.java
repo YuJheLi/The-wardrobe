@@ -99,20 +99,20 @@ public class ChooseActivity extends ActionBarActivity {
                 for (int i = 0; i < clothesList.size(); i++) {
                    if(choosenumber[i]==true){
                        resultClothes.add(clothesList.get(i));
-
                    }
                 }
 
 
 
 
+                if(!resultClothes.isEmpty()){
+                    Intent in=new Intent();
+                    DataWrapper data=new DataWrapper(resultClothes);
+                    in.putExtra("chooselist", data);
 
-                Intent in=new Intent();
-                DataWrapper data=new DataWrapper(resultClothes);
-                in.putExtra("chooselist", data);
-
-                setResult(RESULT_OK,in);
-                finish();
+                    setResult(RESULT_OK,in);
+                    finish();
+                }
             }
         });
 
