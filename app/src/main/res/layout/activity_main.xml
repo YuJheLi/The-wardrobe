@@ -37,6 +37,7 @@
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
                 android:clickable="false"
+
                 android:src="@drawable/enter" />
 
             <ImageView
@@ -53,32 +54,20 @@
                 android:src="@drawable/title"
                 android:layout_gravity="center_horizontal|top" />
 
-            <ImageView
-                android:layout_width="127dp"
-                android:layout_height="127dp"
-                android:id="@+id/imageView3"
-                android:layout_gravity="center_horizontal|bottom"
-                android:src="@drawable/ic_case" />
-
-            <ImageView
-                android:layout_width="94dp"
-                android:layout_height="94dp"
-                android:id="@+id/imageView4"
-                android:layout_gravity="right|bottom"
-                android:src="@drawable/ic_random" />
-
-            <ImageView
-                android:layout_width="88dp"
-                android:layout_height="88dp"
-                android:id="@+id/imageView5"
-                android:layout_gravity="left|bottom"
-                android:src="@drawable/ic_lsave" />
+            <ImageButton
+                android:layout_width="92dp"
+                android:layout_height="87dp"
+                android:id="@+id/imageQ"
+                android:scaleType="fitXY"
+                android:layout_gravity="right|top"
+                android:src="@drawable/ic_launchq" />
 
         </FrameLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+
             android:layout_alignParentTop="false"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal|top"
@@ -86,41 +75,48 @@
 
         </LinearLayout>
 
-        <Button
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:text="搭配Box"
-            android:id="@+id/mybox"
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="48dp"
+            android:layout_gravity="bottom"
             android:layout_below="@+id/frameLayout"
-            android:layout_centerHorizontal="true" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="隨機搭配"
-            android:id="@+id/button7"
-            android:layout_gravity="center_horizontal|bottom"
-            android:layout_below="@+id/frameLayout"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
-
-        <Button
-            android:id="@+id/button"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:text="匯入衣服"
-            android:layout_below="@+id/frameLayout"
-            android:layout_alignParentLeft="true"
+            android:layout_alignParentLeft="false"
             android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true">
 
-            />
+            <ImageButton
+                android:scaleType="fitXY"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/mybox"
+                android:src="@drawable/ic_case"
+                android:layout_centerHorizontal="true"
+                android:background="#ff804214"
+                 />
 
-    </RelativeLayout>
+            <ImageButton
+                android:scaleType="fitXY"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/button"
+                android:src="@drawable/ic_lsave"
+                android:layout_alignParentTop="false"
+                android:layout_alignParentLeft="false"
+                android:layout_alignParentStart="true"
+                android:background="#ff804214"
+                android:layout_alignParentBottom="false" />
 
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="48dp"
-        android:layout_gravity="bottom">
+            <ImageButton
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/button7"
+                android:src="@drawable/ic_random"
+                android:background="#ff804214"
+                android:scaleType="fitXY"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+        </RelativeLayout>
 
     </RelativeLayout>
 

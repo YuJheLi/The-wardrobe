@@ -156,5 +156,19 @@
     <string name="unselect_all">全不選</string>
     <string name="title_activity_choose">選取多個衣物動作</string>
     <string name="title_activity_collect">搭配Box</string>
+    <string name="intro">歡迎使用My Wardrobe衣服穿搭預覽程式。
+1.主畫面左下角的綠色向下箭頭可連接至匯入
+衣物頁面，可在此處拍攝一張衣服的相片或
+者從手機相簿中選取一張圖片匯入至資料庫
+
+2.主畫面正下方的黑色箱形按鈕可連接至資料
+庫，可瀏覽或查找所匯入之衣物。若要進行
+搭配，則在選取完衣服後，按下方按鈕前往
+預覽搭配效果。
+
+3.主畫面右下角的隨機按鈕則會隨機產生一套
+穿衣組合，若不知道要穿什麼不仿考慮看看
+</string>
+
 
 </resources>

@@ -87,13 +87,4 @@
         android:layout_marginLeft="63dp"
         android:layout_marginStart="63dp" />
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/imageViewgaba"
-        android:src="@drawable/ic_gaba"
-        android:layout_alignTop="@+id/numbergg"
-        android:layout_alignLeft="@+id/numbergg"
-        android:layout_alignStart="@+id/numbergg" />
-
 </RelativeLayout>

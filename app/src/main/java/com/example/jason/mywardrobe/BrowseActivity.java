@@ -23,6 +23,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -67,7 +68,7 @@ public class BrowseActivity extends ActionBarActivity implements
     private MatchesManager matchesManager;
 
     private Button choose;
-    private Button search;
+    private ImageButton search;
     private Button getall;
     private boolean multi = false;
     private static final int CHOOSE_OVER = 1;
@@ -119,7 +120,7 @@ public class BrowseActivity extends ActionBarActivity implements
                 startActivityForResult(intent, CHOOSE_OVER);
             }
         });
-        search = (Button) findViewById(R.id.btn_search);
+        search = (ImageButton) findViewById(R.id.btn_search);
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

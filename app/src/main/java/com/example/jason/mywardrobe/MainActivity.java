@@ -1,6 +1,16 @@
 package com.example.jason.mywardrobe;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.Matrix;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
+import android.graphics.drawable.ShapeDrawable;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -13,19 +23,22 @@ import android.view.ViewGroup;
 import android.os.Build;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+
+import model.Matches;
 
 //import com.example.jason.mywardrobe.R;
 
 
 public class MainActivity extends ActionBarActivity {
-    private Button mybox;
+    private ImageButton mybox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);getSupportActionBar().hide();
 
-        Button btn = (Button) findViewById(R.id.button);
+        ImageButton btn = (ImageButton) findViewById(R.id.button);
         btn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,7 +54,7 @@ public class MainActivity extends ActionBarActivity {
                 startActivity(intent);
             }
         });
-        mybox=(Button)findViewById(R.id.mybox);
+        mybox=(ImageButton)findViewById(R.id.mybox);
         mybox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,12 +62,20 @@ public class MainActivity extends ActionBarActivity {
                 startActivity(intent);
             }
         });
-        Button randbtn = (Button) findViewById(R.id.button7);
+        ImageButton randbtn = (ImageButton) findViewById(R.id.button7);
         randbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,RandomActivity.class);
                 startActivity(intent);
+            }
+        });
+        ImageButton Qbutton = (ImageButton) findViewById(R.id.imageQ);
+        Qbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                alert();
             }
         });
 
@@ -63,8 +84,31 @@ public class MainActivity extends ActionBarActivity {
 
 
 
-    }
 
+
+    }
+    public void alert( ) {
+
+
+        AlertDialog.Builder alertadd = new AlertDialog.Builder(
+                MainActivity.this);
+        alertadd.setTitle("App說明");
+
+        LayoutInflater factory = LayoutInflater.from(MainActivity.this);
+        final View view = factory.inflate(R.layout.introduction, null);
+
+        alertadd.setView(view);
+
+        alertadd.setNegativeButton(R.string.dialog_OK, new DialogInterface.OnClickListener() {
+            // do something when the button is clicked
+            public void onClick(DialogInterface arg0, int arg1) {
+
+
+            }
+        });
+
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
