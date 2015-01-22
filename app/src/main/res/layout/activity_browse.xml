@@ -7,14 +7,13 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="#ff804214"
-    tools:context="com.example.jason.mywardrobe.BrowseActivity">
+    tools:context="com.example.jason.mywardrobe.BrowseActivity"
+    android:background="@drawable/wood_back5">
 
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/itemarea"
-        android:background="#ff804214"
         android:id="@+id/relativeLayout2">
 
         <Button
@@ -43,13 +42,23 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/imageViewfind"
+            android:src="@drawable/ic_search"
+            android:layout_below="@+id/btn_search"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignRight="@+id/btn_getall"
+            android:layout_alignEnd="@+id/btn_getall" />
+
     </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="#ff804214"
         android:id="@+id/itemarea"
         android:weightSum="1">
 

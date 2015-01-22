@@ -65,7 +65,19 @@ public class MatchActivity extends ActionBarActivity {
         matrix.postRotate(0);
         Bitmap rotated = Bitmap.createBitmap(myImg, 0, 0, myImg.getWidth(), myImg.getHeight(),
                 matrix, true);
-        btn_topImage.setImageBitmap(rotated);
+
+            Drawable[] array = new Drawable[2];
+
+            ShapeDrawable border = new ShapeDrawable();
+            border.getPaint().setColor(Color.LTGRAY);
+            array[0]=border;
+            array[1] = new BitmapDrawable(rotated);
+            LayerDrawable la=null;
+            la= new LayerDrawable(array);
+
+            la.setLayerInset(0, 0, 0, 0, 0);
+            la.setLayerInset(1, 20, 20, 20, 20);
+            btn_topImage.setImageDrawable(la);
     }
 
         ImageButton btn_belowImage = (ImageButton) findViewById(R.id.imgbtn_pants);
@@ -78,6 +90,25 @@ public class MatchActivity extends ActionBarActivity {
             Bitmap rotated2 = Bitmap.createBitmap(myImg2, 0, 0, myImg2.getWidth(), myImg2.getHeight(),
                     matrix2, true);
             btn_belowImage.setImageBitmap(rotated2);
+            Drawable[] array = new Drawable[2];
+
+            ShapeDrawable border = new ShapeDrawable();
+            border.getPaint().setColor(Color.LTGRAY);
+            array[0]=border;
+            array[1] = new BitmapDrawable(rotated2);
+            LayerDrawable la=null;
+            la= new LayerDrawable(array);
+
+            la.setLayerInset(0, 0, 0, 0, 0);
+            la.setLayerInset(1, 20, 20, 20, 20);
+            btn_belowImage.setImageDrawable(la);
+
+
+
+
+
+
+
         }
         ImageButton btn_topLeft = (ImageButton) findViewById(R.id.imgbtn_clthleft);
         btn_topLeft.setOnClickListener(new View.OnClickListener() {

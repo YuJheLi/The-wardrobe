@@ -192,7 +192,7 @@ public class CollectActivity extends ActionBarActivity {
 
         delete = match_infor;
         alertadd.setView(view);
-        alertadd.setPositiveButton(R.string.dialog_delete, new DialogInterface.OnClickListener() {
+        alertadd.setPositiveButton(R.string.dialog_match, new DialogInterface.OnClickListener() {
             // do something when the button is clicked
             public void onClick(DialogInterface arg0, int arg1) {
                 deletedialod();
@@ -211,8 +211,8 @@ public class CollectActivity extends ActionBarActivity {
     }
     public void deletedialod() {
         AlertDialog.Builder ad = new AlertDialog.Builder(CollectActivity.this);
-        ad.setTitle(R.string.dialog_delete);
-        ad.setMessage(R.string.dialog_deletesure);
+        ad.setTitle(R.string.dialog_match);
+        ad.setMessage(R.string.dialog_deletematch);
         ad.setPositiveButton(R.string.dialog_no, new DialogInterface.OnClickListener() {
 
 
@@ -238,6 +238,7 @@ public class CollectActivity extends ActionBarActivity {
 
 
                     coadpter.dataset(matchesList);
+                    number.setText(formatString(matchesList.size()));
 
 
 
